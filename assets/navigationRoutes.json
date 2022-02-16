@@ -1,0 +1,216 @@
+[
+  {
+    "key": "/",
+    "icon": "home",
+    "title": "Главное",
+    "children": []
+  },
+  {
+    "key": "/purchase",
+    "icon": "shopping-cart",
+    "title": "Покупка",
+    "children": [
+      {
+        "key": "/purchase/work-order",
+        "icon": "ordered-list",
+        "title": "Наряд на работы",
+        "children": []
+      },
+      {
+        "key": "/purchase/movement-of-goods",
+        "icon": "drag",
+        "title": "Перемещение товаров",
+        "children": []
+      },
+      {
+        "key": "/purchase/reciept-of-goods",
+        "icon": "import",
+        "title": "Поступление товаров",
+        "children": []
+      },
+      {
+        "key": "/purchase/sale-of-goods",
+        "icon": "diff",
+        "title": "Реализация товаров",
+        "children": []
+      },
+      {
+        "key": "/purchase/setting-item-prices",
+        "icon": "setting",
+        "title": "Установка цен номенклатуры",
+        "children": []
+      }
+    ]
+  },
+  {
+    "key": "/sale",
+    "icon": "export",
+    "title": "Продажа",
+    "children": [
+      {
+        "key": "/sale/work-order",
+        "icon": "",
+        "title": "Наряд на работы",
+        "children": []
+      },
+      {
+        "key": "/sale/linking-master-to-warehouse",
+        "icon": "",
+        "title": "Привязка мастера к складу",
+        "children": []
+      },
+      {
+        "key": "/sale/sale-of-goods",
+        "icon": "",
+        "title": "Реализация товаров",
+        "children": []
+      },
+      {
+        "key": "/sale/setting-item-prices",
+        "icon": "",
+        "title": "Установка цен номенклатуры",
+        "children": []
+      }
+    ]
+  },
+  {
+    "key": "/warehouse",
+    "icon": "container",
+    "title": "Склад",
+    "children": [
+      {
+        "key": "/warehouse/moving-goods",
+        "icon": "drag",
+        "title": "Перемещение товаров",
+        "children": []
+      }
+    ]
+  },
+  {
+    "key": "/regulatory-reference-information",
+    "icon": "info-circle",
+    "title": "НСИ",
+    "children": [
+      {
+        "key": "/regulatory-reference-information/cars",
+        "icon": "car",
+        "title": "Автомобили",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/currencies",
+        "icon": "dollar",
+        "title": "Валюты",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/contractor-agreements",
+        "icon": "audit",
+        "title": "Договоры контрагентов",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/units",
+        "icon": "column-width",
+        "title": "Единицы измерения",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/service-catalog",
+        "icon": "unordered-list",
+        "title": "Каталог услуг",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/classes",
+        "icon": "copyright",
+        "title": "Классы",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/customers",
+        "icon": "team",
+        "title": "Клиенты",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/contracting-parties",
+        "icon": "solution",
+        "title": "Контрагенты",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/car-model",
+        "icon": "control",
+        "title": "Модели автомобилей",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/nomenclature",
+        "icon": "bars",
+        "title": "Номенклатура",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/organizations",
+        "icon": "ordered-list",
+        "title": "Организации",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/posts",
+        "icon": "folder",
+        "title": "Посты",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/reasons-for-canceling-implementations",
+        "icon": "exclamation-circle",
+        "title": "Причины отмены реализаций",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/warehouses",
+        "icon": "table",
+        "title": "Склады",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/employees",
+        "icon": "usergroup-add",
+        "title": "Сотрудники",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/vat-rates",
+        "icon": "percentage",
+        "title": "Ставки НДС",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/types-of-prices",
+        "icon": "wallet",
+        "title": "Типы цен",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/individuals",
+        "icon": "user",
+        "title": "Физические лица",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/users",
+        "icon": "usergroup-add",
+        "title": "Пользователи",
+        "children": []
+      }
+    ]
+  },
+  {
+    "key": "/administration",
+    "icon": "user",
+    "title": "Администрирование",
+    "children": []
+  }
+]
