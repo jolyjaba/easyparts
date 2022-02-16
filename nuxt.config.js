@@ -2,6 +2,9 @@ import { defineNuxtConfig } from '@nuxt/bridge'
 
 export default defineNuxtConfig({
   ssr: false,
+  bridge: {
+    nitro: false,
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'easyparts',
