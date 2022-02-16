@@ -1,10 +1,11 @@
-import { defineNuxtConfig } from '@nuxt/bridge'
+// import { defineNuxtConfig } from '@nuxt/bridge'
 
-export default defineNuxtConfig({
+export default {
   ssr: false,
-  bridge: {
-    nitro: false,
-  },
+  // bridge: {
+  //   nitro: false,
+  //   typescript: false,
+  // },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'easyparts',
@@ -32,7 +33,7 @@ export default defineNuxtConfig({
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    // '@nuxt/typescript-build',
+    '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
   ],
@@ -52,4 +53,4 @@ export default defineNuxtConfig({
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-})
+}
