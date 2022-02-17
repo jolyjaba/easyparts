@@ -62,6 +62,26 @@
                 :value="`${record[column.key].dynamicForm.value}`"
                 readonly
               />
+              <template v-else-if="column.Тип[0] === 'Дата'">
+                <ADatePicker
+                  v-if="['Дата и время', 'Дата'].includes(column.ЧастиДаты)"
+                  v-model="record[column.key].dynamicForm.value"
+                  :disabled="!column.Доступность"
+                  :placeholder="column.Синоним"
+                  :value-format="getValueFormat(column)"
+                  :format="getFormat(column)"
+                  show-time
+                />
+                <ATimePicker
+                  v-else
+                  v-model="record[column.key].dynamicForm.value"
+                  :disabled="!column.Доступность"
+                  :placeholder="column.Синоним"
+                  :value-format="getValueFormat(column)"
+                  :format="getFormat(column)"
+                  show-time
+                />
+              </template>
               <AInputGroup
                 v-else-if="column.Тип[0].includes('Справочник.')"
                 style="display: flex"
@@ -276,6 +296,16 @@ export default {
     },
   },
   methods: {
+    getValueFormat(type) {
+      if (type.ЧастиДаты === 'Дата') return 'YYYY-MM-DD'
+      else if (type.ЧастиДаты === 'Время') return 'HH:mm:ss'
+      else return 'YYYY-MM-DDTHH:mm:ss'
+    },
+    getFormat(type) {
+      if (type.ЧастиДаты === 'Дата') return 'DD.MM.YYYY'
+      else if (type.ЧастиДаты === 'Время') return 'HH:mm:ss'
+      else return 'DD.MM.YYYY HH:mm:ss'
+    },
     onChange(record) {
       const { synchronizeCols, dataSource, activeTab } = this
       if (synchronizeCols) {
