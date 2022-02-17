@@ -66,7 +66,6 @@
                 <ADatePicker
                   v-if="['Дата и время', 'Дата'].includes(column.ЧастиДаты)"
                   v-model="record[column.key].dynamicForm.value"
-                  :disabled="!column.Доступность"
                   :placeholder="column.Синоним"
                   :value-format="getValueFormat(column)"
                   :format="getFormat(column)"
@@ -75,7 +74,6 @@
                 <ATimePicker
                   v-else
                   v-model="record[column.key].dynamicForm.value"
-                  :disabled="!column.Доступность"
                   :placeholder="column.Синоним"
                   :value-format="getValueFormat(column)"
                   :format="getFormat(column)"
@@ -101,6 +99,7 @@
               <ASelect
                 v-else-if="column.Тип[0].includes('Перечисление.')"
                 v-model="record[column.key].dynamicForm.value"
+                style="width: 315px"
                 :placeholder="column.Синоним"
                 allow-clear
               >
@@ -529,9 +528,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.custom-dropdown {
-  width: auto !important;
-}
-</style>
