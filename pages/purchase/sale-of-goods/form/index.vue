@@ -1,17 +1,17 @@
 <template>
-  <a-page-header :title="title" @back="() => $router.back()">
+  <APageHeader :title="title" @back="() => $router.back()">
     <template slot="extra">
-      <a-button-group>
-        <a-button
+      <AButtonGroup>
+        <AButton
           :loading="loading"
           type="primary"
           @click="writeAndCloseHandle"
         >
           Провести и закрыть
-        </a-button>
-        <a-button :loading="loading" @click="writeHandle"> Записать </a-button>
-        <a-button :loading="loading" @click="postDocument"> Провести </a-button>
-      </a-button-group>
+        </AButton>
+        <AButton :loading="loading" @click="writeHandle"> Записать </AButton>
+        <AButton :loading="loading" @click="postDocument"> Провести </AButton>
+      </AButtonGroup>
     </template>
     <Form
       ref="form"
@@ -32,7 +32,7 @@
       :name-of-object="nameOfObject"
       :table-part-filters="tablePartFilters"
     />
-  </a-page-header>
+  </APageHeader>
 </template>
 
 <script>

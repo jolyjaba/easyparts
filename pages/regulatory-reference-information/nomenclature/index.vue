@@ -1,28 +1,28 @@
 <template>
-  <a-page-header :title="title" @back="() => $router.back()">
-    <a-breadcrumb>
-      <a-breadcrumb-item v-for="route in routes" :key="route.path">
+  <APageHeader :title="title" @back="() => $router.back()">
+    <ABreadcrumb>
+      <ABreadcrumbItem v-for="route in routes" :key="route.path">
         <a @click="onClick(route)">
           {{ route.breadcrumbName }}
         </a>
-      </a-breadcrumb-item>
-    </a-breadcrumb>
+      </ABreadcrumbItem>
+    </ABreadcrumb>
     <br />
     <template slot="extra">
-      <a-button
+      <AButton
         type="primary"
         :disabled="!editable"
         @click="$router.push(`${$route.path}/form`)"
       >
         Создать
-      </a-button>
+      </AButton>
     </template>
     <DataTable
       :editable="editable"
       :name-of-object="nameOfObject"
       :type-of-object="typeOfObject"
     />
-  </a-page-header>
+  </APageHeader>
 </template>
 
 <script>

@@ -1,12 +1,12 @@
 <template>
-  <a-config-provider :locale="ruRu">
-    <a-layout :has-sider="true" style="min-height: 100vh">
+  <AConfigProvider :locale="ruRu">
+    <ALayout :has-sider="true" style="min-height: 100vh">
       <NavigationTree :width="width" />
-      <a-layout-content>
+      <ALayoutContent>
         <Nuxt />
-      </a-layout-content>
-    </a-layout>
-  </a-config-provider>
+      </ALayoutContent>
+    </ALayout>
+  </AConfigProvider>
 </template>
 
 <script>

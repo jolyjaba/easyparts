@@ -1,13 +1,13 @@
 <template>
-  <a-page-header :title="title" @back="() => $router.back()">
+  <APageHeader :title="title" @back="() => $router.back()">
     <template slot="extra">
-      <a-button
+      <AButton
         type="primary"
         :disabled="!editable"
         @click="$router.push(`${$route.path}/form`)"
       >
         Создать
-      </a-button>
+      </AButton>
     </template>
     <DataTable
       :editable="editable"
@@ -15,7 +15,7 @@
       :type-of-object="typeOfObject"
     >
       <template slot="actions" slot-scope="{ record }">
-        <a-button
+        <AButton
           title="Создать новую копию"
           type="primary"
           icon="copy"
@@ -23,7 +23,7 @@
         />
       </template>
     </DataTable>
-  </a-page-header>
+  </APageHeader>
 </template>
 
 <script>

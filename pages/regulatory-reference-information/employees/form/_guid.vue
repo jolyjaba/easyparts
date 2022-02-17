@@ -1,10 +1,10 @@
 <template>
-  <a-page-header :title="title" @back="() => $router.back()">
+  <APageHeader :title="title" @back="() => $router.back()">
     <template slot="extra">
-      <a-button type="primary" @click="writeAndCloseHandle">
+      <AButton type="primary" @click="writeAndCloseHandle">
         Записать и закрыть
-      </a-button>
-      <a-button @click="writeHandle">Записать</a-button>
+      </AButton>
+      <AButton @click="writeHandle">Записать</AButton>
     </template>
     <Form
       v-if="!$fetchState.pending"
@@ -21,7 +21,7 @@
       :type-of-object="typeOfObject"
       :name-of-object="nameOfObject"
     />
-  </a-page-header>
+  </APageHeader>
 </template>
 
 <script>

@@ -1,20 +1,20 @@
 <template>
-  <a-layout-sider v-model="collapsed" collapsible width="300">
-    <a-menu
+  <ALayoutSider v-model="collapsed" collapsible width="300">
+    <AMenu
       v-model="selectedKeys"
       theme="dark"
       mode="inline"
       @click="(event) => $router.push(event.key)"
     >
       <template v-for="navigation in navigationItems">
-        <a-menu-item v-if="!navigation.children.length" :key="navigation.key">
-          <a-icon v-if="navigation.icon" :type="navigation.icon" />
+        <AMenuItem v-if="!navigation.children.length" :key="navigation.key">
+          <AIcon v-if="navigation.icon" :type="navigation.icon" />
           <span>{{ navigation.title }}</span>
-        </a-menu-item>
+        </AMenuItem>
         <NavigationItem v-else :key="navigation.key" :menu-info="navigation" />
       </template>
-    </a-menu>
-  </a-layout-sider>
+    </AMenu>
+  </ALayoutSider>
 </template>
 
 <script lang="ts">

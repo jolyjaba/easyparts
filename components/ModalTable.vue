@@ -1,24 +1,24 @@
 <template>
   <div>
-    <a-button
+    <AButton
       :disabled="parentGuid === '00000000-0000-0000-0000-000000000000'"
       class="custom-button"
       :loading="loading"
       type="primary"
       @click="goBack"
     >
-      <a-icon type="left" />
+      <AIcon type="left" />
       Назад
-    </a-button>
-    <a-breadcrumb>
-      <a-breadcrumb-item v-for="route in routes" :key="route.path">
+    </AButton>
+    <ABreadcrumb>
+      <ABreadcrumbItem v-for="route in routes" :key="route.path">
         <a @click="onClick(route)">
           {{ route.breadcrumbName }}
         </a>
-      </a-breadcrumb-item>
-    </a-breadcrumb>
+      </ABreadcrumbItem>
+    </ABreadcrumb>
     <br />
-    <a-table
+    <ATable
       bordered
       row-key="Ссылка"
       :columns="columns"
@@ -34,19 +34,19 @@
         :slot="col.scopedSlots.customRender"
         slot-scope="text, record"
       >
-        <a-button-group
+        <AButtonGroup
           v-if="col.scopedSlots.customRender === 'operation'"
           :key="index"
         >
-          <a-button
+          <AButton
             v-if="isGroup || !record.ЭтоГруппа"
             type="primary"
             title="Выбрать"
             icon="select"
             @click="$emit('select', record)"
           />
-        </a-button-group>
-        <a-icon
+        </AButtonGroup>
+        <AIcon
           v-else-if="col.scopedSlots.customRender === 'markDeletion'"
           :key="index"
           :type="getType(record)"
@@ -54,7 +54,7 @@
           :style="{ fontSize: '18px' }"
           :two-tone-color="getTwoToneColor(record)"
         />
-        <a-icon
+        <AIcon
           v-else
           :key="index"
           theme="twoTone"
@@ -63,7 +63,7 @@
           :style="{ fontSize: '18px' }"
         />
       </template>
-    </a-table>
+    </ATable>
   </div>
 </template>
 

@@ -1,31 +1,31 @@
 <template>
-  <a-form-model
+  <AFormModel
     ref="dynamicValidateForm"
     layout="vertical"
     :style="{ marginTop: '16px' }"
     :model="filteredAndSortedDynamicForm"
   >
-    <a-row :gutter="[24, 0]" type="flex">
-      <a-col
+    <ARow :gutter="[24, 0]" type="flex">
+      <ACol
         v-for="(domain, index) in filteredAndSortedDynamicForm.keys"
         :key="domain.key"
         :span="getSpan(domain)"
         :order="filteredRules[domain.key].Порядок"
       >
-        <a-form-model-item
+        <AFormModelItem
           class="custom-form-model-item"
           :label="filteredRules[domain.key].Синоним"
           :prop="`keys.${index}.value`"
           :required="filteredRules[domain.key].Обязательный"
         >
-          <a-input
+          <AInput
             v-if="filteredRules[domain.key].Тип.includes('Документ.')"
             v-model="domain.value"
             :placeholder="filteredRules[domain.key].Синоним"
             allow-clear
             :disabled="!filteredRules[domain.key].Доступность"
           />
-          <a-input
+          <AInput
             v-else-if="filteredRules[domain.key].Тип === 'Строка'"
             v-model="domain.value"
             :disabled="!filteredRules[domain.key].Доступность"
@@ -33,7 +33,7 @@
             allow-clear
           />
           <template v-else-if="filteredRules[domain.key].Тип === 'Дата'">
-            <a-date-picker
+            <ADatePicker
               v-if="
                 ['Дата и время', 'Дата'].includes(
                   filteredRules[domain.key].ЧастиДаты
@@ -46,7 +46,7 @@
               :format="getFormat(filteredRules[domain.key])"
               show-time
             />
-            <a-time-picker
+            <ATimePicker
               v-else
               v-model="domain.value"
               :disabled="!filteredRules[domain.key].Доступность"
@@ -56,12 +56,12 @@
               show-time
             />
           </template>
-          <a-checkbox
+          <ACheckbox
             v-else-if="filteredRules[domain.key].Тип === 'Булево'"
             v-model="domain.value"
             :disabled="!filteredRules[domain.key].Доступность"
           />
-          <a-input-number
+          <AInputNumber
             v-else-if="filteredRules[domain.key].Тип === 'Число'"
             v-model="domain.value"
             :min="filteredRules[domain.key].min"
@@ -70,37 +70,37 @@
             :formatter="(value) => format(value)"
             :parser="(value) => parse(value)"
           />
-          <a-select
+          <ASelect
             v-else-if="filteredRules[domain.key].Тип.includes('Перечисление.')"
             v-model="domain.value"
             :disabled="!filteredRules[domain.key].Доступность"
             :placeholder="filteredRules[domain.key].Синоним"
           >
-            <a-select-option
+            <ASelectOption
               v-for="option in getAllOptions[domain.key]"
               :key="option.Имя"
               :value="option.Имя"
             >
               {{ option.Представление }}
-            </a-select-option>
-          </a-select>
-          <a-input-group
+            </ASelectOption>
+          </ASelect>
+          <AInputGroup
             v-else-if="filteredRules[domain.key].Тип.includes('Справочник.')"
             style="display: flex"
             compact
           >
-            <a-input
+            <AInput
               :placeholder="filteredRules[domain.key].Синоним"
               :value="getObjValue(filteredRules[domain.key], domain.value)"
             />
-            <a-button
+            <AButton
               type="primary"
               :disabled="!filteredRules[domain.key].Доступность"
               @click="showModal(filteredRules[domain.key])"
             >
               Выбрать
-            </a-button>
-            <a-modal
+            </AButton>
+            <AModal
               width="66%"
               :footer="null"
               destroy-on-close
@@ -115,12 +115,12 @@
                 :filtered-rule="filteredRules[domain.key]"
                 @select="onSelect($event, domain, filteredRules[domain.key])"
               />
-            </a-modal>
-          </a-input-group>
-        </a-form-model-item>
-      </a-col>
-    </a-row>
-  </a-form-model>
+            </AModal>
+          </AInputGroup>
+        </AFormModelItem>
+      </ACol>
+    </ARow>
+  </AFormModel>
 </template>
 
 <script>

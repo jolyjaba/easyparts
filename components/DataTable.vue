@@ -1,5 +1,5 @@
 <template>
-  <a-table
+  <ATable
     bordered
     row-key="Ссылка"
     :columns="columns"
@@ -19,31 +19,31 @@
       <span v-if="col.scopedSlots.customRender === 'Дата'" :key="index">
         {{ moment(text).format('DD.MM.YYYY HH:mm:ss') }}
       </span>
-      <a-button-group
+      <AButtonGroup
         v-else-if="col.scopedSlots.customRender === 'operation'"
         :key="index"
       >
-        <a-button
+        <AButton
           icon="edit"
           type="primary"
           title="Редактировать"
           @click="editHandler(record)"
         />
         <slot :record="record" name="actions" />
-        <a-popconfirm
+        <APopconfirm
           ok-text="Да"
           cancel-text="Нет"
           :title="`${getTitle(record)}?`"
           @confirm="markForDelete(record)"
         >
-          <a-button
+          <AButton
             :title="getTitle(record)"
             :type="record.ПометкаУдаления ? 'default' : 'danger'"
             :icon="record.ПометкаУдаления ? 'rollback' : 'tag'"
           />
-        </a-popconfirm>
-      </a-button-group>
-      <a-icon
+        </APopconfirm>
+      </AButtonGroup>
+      <AIcon
         v-else-if="col.scopedSlots.customRender === 'markDeletion'"
         :key="index"
         :type="getType(record)"
@@ -51,7 +51,7 @@
         :style="{ fontSize: '18px' }"
         :two-tone-color="getTwoToneColor(record)"
       />
-      <a-icon
+      <AIcon
         v-else
         :key="index"
         :style="{ fontSize: '18px' }"
@@ -60,7 +60,7 @@
         :type="text ? 'check-square' : 'border'"
       />
     </template>
-  </a-table>
+  </ATable>
 </template>
 
 <script>

@@ -1,8 +1,8 @@
 <template>
-  <a-tabs v-if="hasTablePartData" v-model="activeTab">
+  <ATabs v-if="hasTablePartData" v-model="activeTab">
     <template slot="tabBarExtraContent">
-      <a-button-group>
-        <a-modal
+      <AButtonGroup>
+        <AModal
           width="66%"
           :footer="null"
           destroy-on-close
@@ -11,25 +11,25 @@
           @cancel="cancel"
         >
           <ModalTable :filtered-rule="filteredRule" @select="onSelect" />
-        </a-modal>
-        <a-button type="primary" @click="onAddRow"> Добавить </a-button>
-        <a-button v-if="hasMultiselect" @click="onMultiselect">
+        </AModal>
+        <AButton type="primary" @click="onAddRow"> Добавить </AButton>
+        <AButton v-if="hasMultiselect" @click="onMultiselect">
           Подбор
-        </a-button>
-        <a-button
+        </AButton>
+        <AButton
           icon="arrow-up"
           :disabled="disableOnUpper"
           @click="upPosition"
         />
-        <a-button
+        <AButton
           icon="arrow-down"
           :disabled="disableOnLower"
           @click="downPosition"
         />
-      </a-button-group>
+      </AButtonGroup>
     </template>
-    <a-tab-pane v-for="tab in getTablePart" :key="tab.key" :tab="tab.Синоним">
-      <a-table
+    <ATabPane v-for="tab in getTablePart" :key="tab.key" :tab="tab.Синоним">
+      <ATable
         bordered
         :scroll="{ x: true }"
         :row-selection="rowSelection"
@@ -37,7 +37,7 @@
         :data-source="dataSource[tab.key]"
       >
         <template slot="operations" slot-scope="text, record">
-          <a-button
+          <AButton
             icon="delete"
             type="primary"
             title="Удалить"
@@ -49,55 +49,55 @@
           :slot="column.key"
           slot-scope="text, record"
         >
-          <a-form-model
+          <AFormModel
             ref="tabs"
             :key="column.key"
             :model="record[column.key].dynamicForm"
           >
-            <a-form-model-item
+            <AFormModelItem
               class="custom-form-model-item"
               :required="column.Обязательный"
               :prop="column.prop"
             >
-              <a-mentions
+              <AMentions
                 v-if="!column.Доступность"
                 :value="`${record[column.key].dynamicForm.value}`"
                 readonly
               />
-              <a-input-group
+              <AInputGroup
                 v-else-if="column.Тип[0].includes('Справочник.')"
                 style="display: flex"
                 compact
               >
-                <a-input
+                <AInput
                   :value="record[column.key].dynamicForm.value.value"
                   :placeholder="column.Синоним"
                   @change="onChange(record)"
                 />
-                <a-button
+                <AButton
                   icon="select"
                   type="primary"
                   @click="openModal(column, record)"
                 />
-              </a-input-group>
-              <a-select
+              </AInputGroup>
+              <ASelect
                 v-else-if="column.Тип[0].includes('Перечисление.')"
                 v-model="record[column.key].dynamicForm.value"
               >
-                <a-select-option
+                <ASelectOption
                   v-for="option in getAllOptions[column.Тип[0].split('.')[1]]"
                   :key="option.Имя"
                   :value="option.Имя"
                 >
                   {{ option.Представление }}
-                </a-select-option>
-              </a-select>
-              <a-checkbox
+                </ASelectOption>
+              </ASelect>
+              <ACheckbox
                 v-else-if="column.Тип[0] === 'Булево'"
                 v-model="record[column.key].dynamicForm.value"
                 @change="onChange(record)"
               />
-              <a-input-number
+              <AInputNumber
                 v-else-if="column.Тип[0] === 'Число'"
                 v-model="record[column.key].dynamicForm.value"
                 :placeholder="column.Синоним"
@@ -105,18 +105,18 @@
                 :max="column.max"
                 @change="onChange(record)"
               />
-              <a-input
+              <AInput
                 v-else-if="column.Тип[0] === 'Строка'"
                 v-model="record[column.key].dynamicForm.value"
                 :placeholder="column.Синоним"
                 @change="onChange(record)"
               />
-            </a-form-model-item>
-          </a-form-model>
+            </AFormModelItem>
+          </AFormModel>
         </template>
-      </a-table>
-    </a-tab-pane>
-  </a-tabs>
+      </ATable>
+    </ATabPane>
+  </ATabs>
 </template>
 
 <script>

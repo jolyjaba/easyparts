@@ -1,9 +1,9 @@
 <template>
-  <a-page-header :title="title" @back="() => $router.back()">
+  <APageHeader :title="title" @back="() => $router.back()">
     <template slot="extra">
-      <a-button type="primary" :disabled="!editable">
+      <AButton type="primary" :disabled="!editable">
         <NuxtLink :to="`${$route.path}/form`"> Создать </NuxtLink>
-      </a-button>
+      </AButton>
     </template>
     <DataTable
       :editable="editable"
@@ -11,7 +11,7 @@
       :type-of-object="typeOfObject"
     >
       <template slot="actions" slot-scope="{ record }">
-        <a-button
+        <AButton
           title="Создать новую копию"
           type="primary"
           icon="copy"
@@ -19,7 +19,7 @@
         />
       </template>
     </DataTable>
-  </a-page-header>
+  </APageHeader>
 </template>
 
 <script>
