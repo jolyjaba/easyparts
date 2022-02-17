@@ -19,14 +19,7 @@
           :required="filteredRules[domain.key].Обязательный"
         >
           <AInput
-            v-if="filteredRules[domain.key].Тип.includes('Документ.')"
-            v-model="domain.value"
-            :placeholder="filteredRules[domain.key].Синоним"
-            allow-clear
-            :disabled="!filteredRules[domain.key].Доступность"
-          />
-          <AInput
-            v-else-if="filteredRules[domain.key].Тип === 'Строка'"
+            v-if="filteredRules[domain.key].Тип === 'Строка'"
             v-model="domain.value"
             :disabled="!filteredRules[domain.key].Доступность"
             :placeholder="filteredRules[domain.key].Синоним"
@@ -75,6 +68,7 @@
             v-model="domain.value"
             :disabled="!filteredRules[domain.key].Доступность"
             :placeholder="filteredRules[domain.key].Синоним"
+            allow-clear
           >
             <ASelectOption
               v-for="option in getAllOptions[domain.key]"
@@ -85,7 +79,10 @@
             </ASelectOption>
           </ASelect>
           <AInputGroup
-            v-else-if="filteredRules[domain.key].Тип.includes('Справочник.')"
+            v-else-if="
+              filteredRules[domain.key].Тип.includes('Справочник.') ||
+              filteredRules[domain.key].Тип.includes('Документ.')
+            "
             style="display: flex"
             compact
           >
@@ -112,6 +109,7 @@
                 :params="params"
                 :filters="filters"
                 :is-group="isGroup"
+                :object-type="filteredRules[domain.key].Тип.split('.')[0]"
                 :filtered-rule="filteredRules[domain.key]"
                 @select="onSelect($event, domain, filteredRules[domain.key])"
               />
@@ -166,7 +164,8 @@ export default {
                 value.МаксимальноеЗначение !== null
                   ? value.МаксимальноеЗначение
                   : Infinity,
-              ...(Тип.includes('Справочник.') && { isShown: false }),
+              ...((Тип.includes('Справочник.') ||
+                Тип.includes('Документ.')) && { isShown: false }),
             },
           }),
         }

@@ -2,11 +2,7 @@
   <APageHeader :title="title" @back="() => $router.back()">
     <template slot="extra">
       <AButtonGroup>
-        <AButton
-          :loading="loading"
-          type="primary"
-          @click="writeAndCloseHandle"
-        >
+        <AButton :loading="loading" type="primary" @click="postAndCloseHandle">
           Провести и закрыть
         </AButton>
         <AButton :loading="loading" @click="writeHandle"> Записать </AButton>
@@ -41,19 +37,5 @@ export default {
     nameOfObject: 'ПеремещениеТоваров',
     typeOfObject: 'Документы',
   }),
-  methods: {
-    async postDocument() {
-      if (!this.posted) {
-        const payload = {
-          nameOfObject: this.nameOfObject,
-          typeOfObject: this.typeOfObject,
-          guid: this.selected.Ссылка,
-          action: 'Провести',
-        }
-        await this.$store.dispatch('getOrUpdateObject', payload)
-        this.$fetch()
-      }
-    },
-  },
 }
 </script>

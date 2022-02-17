@@ -8,7 +8,16 @@ export default {
     },
   },
   methods: {
-    async writeHandle({ close } = { close: false }) {
+    async postAndCloseHandle() {
+      await this.writeHandle({ close: true, post: true })
+    },
+    async writeAndCloseHandle() {
+      await this.writeHandle({ close: true })
+    },
+    async postDocument() {
+      await this.writeHandle({ post: true })
+    },
+    async writeHandle({ close, post } = { close: false, post: false }) {
       const {
         tablePartData,
         typeOfObject,
@@ -60,17 +69,15 @@ export default {
         const { Данные } = await $store.dispatch('fetchOrWriteObject', payload)
         const guid = Данные?.Ссылка
         if (guid) {
-          if (!close) {
-            const currentPath = `/${$route.path
-              .split('/')
-              .splice(-5, 3)
-              .join('/')}`
-            $router.replace(`${currentPath}/${guid}`)
-            return
-          }
-          return true
+          const currentPath = `/${$route.path
+            .split('/')
+            .splice(-5, 3)
+            .join('/')}`
+          $router.replace({
+            path: `${currentPath}/${guid}`,
+            query: { close, post },
+          })
         }
-        return false
       }
     },
     setFormData(data) {

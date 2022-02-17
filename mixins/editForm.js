@@ -84,6 +84,28 @@ export default {
     const { title } = this
     return { title }
   },
+  watch: {
+    $route: {
+      deep: true,
+      immediate: true,
+      handler(val) {
+        let post = val.query?.post
+        let close = val.query?.close
+        if (post) {
+          post = JSON.parse(post)
+          if (post) {
+            this.postDocument()
+          }
+        }
+        if (close) {
+          close = JSON.parse(close)
+          if (close) {
+            this.$router.back()
+          }
+        }
+      },
+    },
+  },
   computed: {
     ...mapGetters({
       metadata: 'metadata',
@@ -116,9 +138,39 @@ export default {
   },
   methods: {
     async writeAndCloseHandle() {
+      const succes = await this.writeHandle()
+      if (succes) {
+        this.$router.back()
+      }
+    },
+    async postAndCloseHandle() {
       const { writeHandle, $router } = this
-      await writeHandle()
-      $router.back()
+      const succes = await writeHandle()
+      if (succes) {
+        await this.postDocument()
+        $router.back()
+      }
+    },
+    async postDocument() {
+      if (!this.posted) {
+        const {
+          $store,
+          $fetch,
+          nameOfObject,
+          typeOfObject,
+          $route: {
+            params: { guid },
+          },
+        } = this
+        const payload = {
+          action: 'Провести',
+          nameOfObject,
+          typeOfObject,
+          guid,
+        }
+        await $store.dispatch('getOrUpdateObject', payload)
+        $fetch()
+      }
     },
     async writeHandle() {
       const {
@@ -171,7 +223,11 @@ export default {
           typeOfObject,
           action: 'Записать',
         }
-        await $store.dispatch(`getOrUpdateObject`, payload)
+        const { Ошибка } = await $store.dispatch(`getOrUpdateObject`, payload)
+        if (!Ошибка) {
+          return true
+        }
+        return false
       }
     },
     setDynamicForm() {
@@ -186,7 +242,7 @@ export default {
         const objValue = key + suffix
         if (!key.includes(suffix) && !!data[objValue] && !!rules[key]) {
           const [type, obj] = rules[key].Тип[0].split('.')
-          if (type === 'Справочник') {
+          if (type === 'Справочник' || type === 'Документ') {
             this.selectOptions = {
               ...this.selectOptions,
               [obj]: [{ Ссылка: data[key], Представление: data[objValue] }],

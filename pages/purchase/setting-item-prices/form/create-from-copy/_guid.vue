@@ -2,11 +2,7 @@
   <APageHeader :title="title" @back="() => $router.back()">
     <template slot="extra">
       <AButtonGroup>
-        <AButton
-          :loading="loading"
-          type="primary"
-          @click="writeAndCloseHandle"
-        >
+        <AButton :loading="loading" type="primary" @click="postAndCloseHandle">
           Провести и закрыть
         </AButton>
         <AButton :loading="loading" @click="writeHandle"> Записать </AButton>
@@ -63,13 +59,6 @@ export default {
         },
       }
       return [nomenclatureToVatRate]
-    },
-  },
-  methods: {
-    async postDocument() {
-      if (!this.posted) {
-        await this.writeHandle()
-      }
     },
   },
 }

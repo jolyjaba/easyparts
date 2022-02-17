@@ -89,14 +89,16 @@ export default {
     },
   },
   methods: {
-    async writeAndCloseHandle() {
-      const { writeHandle, $router } = this
-      const created = await writeHandle({ close: true })
-      if (created) {
-        $router.back()
-      }
+    async postAndCloseHandle() {
+      await this.writeHandle({ close: true, post: true })
     },
-    async writeHandle({ close } = { close: false }) {
+    async writeAndCloseHandle() {
+      await this.writeHandle({ close: true })
+    },
+    async postDocument() {
+      await this.writeHandle({ post: true })
+    },
+    async writeHandle({ close, post } = { close: false, post: false }) {
       const {
         tablePartData,
         typeOfObject,
@@ -148,13 +150,11 @@ export default {
         const { Данные } = await $store.dispatch('fetchOrWriteObject', payload)
         const guid = Данные?.Ссылка
         if (guid) {
-          if (!close) {
-            $router.replace(`${$route.path}/${guid}`)
-            return
-          }
-          return true
+          $router.replace({
+            path: `${$route.path}/${guid}`,
+            query: { post, close },
+          })
         }
-        return false
       }
     },
   },

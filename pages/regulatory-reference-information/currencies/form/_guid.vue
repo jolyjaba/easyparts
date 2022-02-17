@@ -135,6 +135,12 @@ export default {
     },
   },
   methods: {
+    async writeAndCloseHandle() {
+      const succes = await this.writeHandle()
+      if (succes) {
+        this.$router.back()
+      }
+    },
     async writeHandle() {
       const {
         $refs,
@@ -167,7 +173,11 @@ export default {
           typeOfObject,
           action: 'Записать',
         }
-        await $store.dispatch(`getOrUpdateObject`, payload)
+        const { Ошибка } = await $store.dispatch(`getOrUpdateObject`, payload)
+        if (!Ошибка) {
+          return true
+        }
+        return false
       }
     },
   },

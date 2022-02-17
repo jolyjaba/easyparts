@@ -13,9 +13,7 @@
           <ModalTable :filtered-rule="filteredRule" @select="onSelect" />
         </AModal>
         <AButton type="primary" @click="onAddRow"> Добавить </AButton>
-        <AButton v-if="hasMultiselect" @click="onMultiselect">
-          Подбор
-        </AButton>
+        <AButton v-if="hasMultiselect" @click="onMultiselect"> Подбор </AButton>
         <AButton
           icon="arrow-up"
           :disabled="disableOnUpper"
@@ -83,6 +81,8 @@
               <ASelect
                 v-else-if="column.Тип[0].includes('Перечисление.')"
                 v-model="record[column.key].dynamicForm.value"
+                :placeholder="column.Синоним"
+                allow-clear
               >
                 <ASelectOption
                   v-for="option in getAllOptions[column.Тип[0].split('.')[1]]"
@@ -472,14 +472,19 @@ export default {
       let newRow = {}
       Object.keys(tab.Реквизиты).forEach((key) => {
         const type = tab.Реквизиты[key].Тип[0]
-        const value =
-          type === 'Булево'
-            ? false
-            : type === 'Число'
-            ? 0
-            : type.includes('Справочник.')
-            ? { key: '', value: '' }
-            : ''
+        let value
+        if (key === 'НомерСтроки') {
+          value = dataSource[activeTab].length + 1
+        } else {
+          value =
+            type === 'Булево'
+              ? false
+              : type === 'Число'
+              ? 0
+              : type.includes('Справочник.')
+              ? { key: '', value: '' }
+              : ''
+        }
         newRow = {
           key: newKey,
           ...newRow,
@@ -494,3 +499,9 @@ export default {
   },
 }
 </script>
+
+<style>
+.custom-dropdown {
+  width: auto !important;
+}
+</style>

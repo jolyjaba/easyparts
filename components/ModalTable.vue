@@ -80,7 +80,7 @@ export default {
     params: { type: Array, default: () => [] },
     filters: { type: Array, default: () => [] },
     filteredRule: { type: Object, required: true },
-    typeOfObject: { type: String, default: () => 'Справочники' },
+    objectType: { type: String, default: () => 'Справочники' },
   },
   data: () => ({
     dataSource: [],
@@ -136,6 +136,10 @@ export default {
     ...mapGetters({
       metadata: 'metadata',
     }),
+    typeOfObject() {
+      const { metadata, objectType } = this
+      return Object.keys(metadata).find((key) => key.includes(objectType)) || ''
+    },
     nameOfObject() {
       return this.filteredRule.Тип.split('.')[1]
     },
