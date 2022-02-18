@@ -2,8 +2,8 @@
   <div>
     <AButton
       :disabled="parentGuid === '00000000-0000-0000-0000-000000000000'"
+      :loading="$fetchState.pending"
       class="custom-button"
-      :loading="loading"
       type="primary"
       @click="goBack"
     >
@@ -22,10 +22,10 @@
       bordered
       row-key="Ссылка"
       :columns="columns"
-      :loading="loading"
       :scroll="{ x: true }"
       :pagination="pagination"
       :data-source="dataSource"
+      :loading="$fetchState.pending"
       @expand="onExpand"
       @change="onTableChange"
     >
@@ -34,8 +34,11 @@
         :slot="col.scopedSlots.customRender"
         slot-scope="text, record"
       >
+        <span v-if="col.scopedSlots.customRender === 'Дата'" :key="index">
+          {{ moment(text).format('DD.MM.YYYY HH:mm:ss') }}
+        </span>
         <AButtonGroup
-          v-if="col.scopedSlots.customRender === 'operation'"
+          v-else-if="col.scopedSlots.customRender === 'operation'"
           :key="index"
         >
           <AButton
@@ -57,10 +60,10 @@
         <AIcon
           v-else
           :key="index"
-          theme="twoTone"
-          :type="`${text ? 'check' : 'close'}-square`"
-          :two-tone-color="text ? '#52c41a' : '#eb2f96'"
           :style="{ fontSize: '18px' }"
+          :theme="text ? 'twoTone' : 'outlined'"
+          :two-tone-color="text ? '#52c41a' : ''"
+          :type="text ? 'check-square' : 'border'"
         />
       </template>
     </ATable>
@@ -69,6 +72,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import moment from 'moment'
 
 export default {
   name: 'ModalTable',
@@ -83,8 +87,8 @@ export default {
     objectType: { type: String, default: () => 'Справочники' },
   },
   data: () => ({
+    moment,
     dataSource: [],
-    loading: false,
     guidHistory: [],
     parentGuid: '00000000-0000-0000-0000-000000000000',
     pagination: {
@@ -99,7 +103,6 @@ export default {
     },
   }),
   async fetch() {
-    this.loading = true
     this.pagination.disabled = true
     const dataSource = await this.getDataSource()
     this.dataSource = dataSource.Объекты.map((obj) => ({
@@ -110,7 +113,6 @@ export default {
     this.pagination.total =
       dataSource.КонечнаяСтраница * this.pagination.pageSize
     this.pagination.disabled = false
-    this.loading = false
     const { $store, routes, parentGuid, nameOfObject, typeOfObject } = this
     const guid = parentGuid
     if (guid !== '00000000-0000-0000-0000-000000000000') {
@@ -171,7 +173,7 @@ export default {
           ? `${key}Представление`
           : key,
         ellipsis: true,
-        ...(value.Тип === 'Булево' && {
+        ...(['Булево', 'Дата'].includes(value.Тип) && {
           scopedSlots: { customRender: key },
           align: 'center',
         }),

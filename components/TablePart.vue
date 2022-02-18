@@ -445,6 +445,9 @@ export default {
       dataSource[activeTab] = [...newArr].map((item, index) => ({
         ...item,
         key: index,
+        ...(item.НомерСтроки && {
+          НомерСтроки: { dynamicForm: { value: index + 1 } },
+        }),
       }))
     },
     upPosition() {

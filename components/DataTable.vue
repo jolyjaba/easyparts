@@ -76,7 +76,8 @@ export default {
         return this.$route.path
       },
     },
-    editable: { type: Boolean, reqired: true },
+    editable: { type: Boolean },
+    markable: { type: Boolean, default: () => true },
     nameOfObject: { type: String, reqired: true, default: () => '' },
     typeOfObject: { type: String, reqired: true, default: () => '' },
   },
@@ -149,8 +150,9 @@ export default {
       metadata: 'metadata',
     }),
     customRow() {
+      const { editable, dblClickHandler } = this
       return (record) => ({
-        on: { dblclick: () => this.dblClickHandler(record) },
+        on: { dblclick: () => editable && dblClickHandler(record) },
       })
     },
     isGroup() {
@@ -206,13 +208,14 @@ export default {
           Порядок: 0,
         })
       if (!keys.some((item) => item.dataIndex === 'ПометкаУдаления')) {
-        keys.unshift({
-          title: '',
-          dataIndex: 'ПометкаУдаления',
-          align: 'center',
-          scopedSlots: { customRender: 'markDeletion' },
-          Порядок: 0,
-        })
+        this.markable &&
+          keys.unshift({
+            title: '',
+            dataIndex: 'ПометкаУдаления',
+            align: 'center',
+            scopedSlots: { customRender: 'markDeletion' },
+            Порядок: 0,
+          })
       }
       return keys.sort((a, b) => a.Порядок - b.Порядок)
     },
