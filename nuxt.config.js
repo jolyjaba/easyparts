@@ -46,9 +46,12 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    // https://github.com/potato4d/nuxt-client-init-module
     'nuxt-client-init-module',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    // https://luxdamore.github.io/nuxt-prune-html/
+    '@luxdamore/nuxt-prune-html'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
