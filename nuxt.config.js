@@ -30,8 +30,16 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
+  router: {
+    mode: 'hash',
+  },
+
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    // https://github.com/harlan-zw/nuxt-webpack-optimisations
+    'nuxt-webpack-optimisations',
+    // https://github.com/Developmint/nuxt-purgecss
+    'nuxt-purgecss',
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/stylelint
@@ -40,9 +48,12 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    // https://github.com/potato4d/nuxt-client-init-module
     'nuxt-client-init-module',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    // https://github.com/victorgarciaesgi/nuxt-typed-router/tree/nuxt2
+    'nuxt-typed-router',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

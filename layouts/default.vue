@@ -3,7 +3,7 @@
     <ALayout :has-sider="true" style="min-height: 100vh">
       <NavigationTree :width="width" />
       <ALayoutContent>
-        <Nuxt />
+        <Nuxt class="full-height" />
       </ALayoutContent>
     </ALayout>
   </AConfigProvider>
@@ -62,3 +62,9 @@ export default {
   methods: {},
 }
 </script>
+
+<style>
+.full-height {
+  min-height: 100%;
+}
+</style>
