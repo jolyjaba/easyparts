@@ -1,10 +1,17 @@
 <template>
   <AConfigProvider :locale="ruRu">
-    <ALayout :has-sider="true" style="min-height: 100vh">
-      <NavigationTree :width="width" />
-      <ALayoutContent>
-        <Nuxt />
-      </ALayoutContent>
+    <ALayout :has-sider="true" class="custom-layout">
+      <NavigationTree :collapsed="collapsed" />
+      <ALayout>
+        <ALayoutHeader class="custom-layout-header">
+          <AIcon
+            class="trigger"
+            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+            @click="() => (collapsed = !collapsed)"
+          />
+        </ALayoutHeader>
+        <Nuxt class="custom-nuxt-layout" />
+      </ALayout>
     </ALayout>
   </AConfigProvider>
 </template>
@@ -24,7 +31,7 @@ export default {
   },
   data: () => ({
     ruRu,
-    width: '300px',
+    collapsed: true,
     modalTableRoutes: [
       {
         path: '00000000-0000-0000-0000-000000000000',
@@ -59,6 +66,25 @@ export default {
       },
     },
   },
-  methods: {},
 }
 </script>
+
+<style scoped>
+.custom-layout {
+  min-height: 100vh;
+}
+
+.custom-layout-header {
+  background: white;
+  padding: 0;
+}
+
+.custom-nuxt-layout {
+  min-height: 100vh;
+}
+
+.trigger {
+  font-size: 18px;
+  padding: 0 24px;
+}
+</style>

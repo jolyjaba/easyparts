@@ -11,6 +11,12 @@
     "title": "Покупка",
     "children": [
       {
+        "key": "/purchase/return-of-goods-from-the-buyer",
+        "icon": "undo",
+        "title": "Возврат Товаров От Покупателя",
+        "children": []
+      },
+      {
         "key": "/purchase/work-order",
         "icon": "ordered-list",
         "title": "Наряд на работы",

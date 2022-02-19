@@ -1,12 +1,8 @@
 <template>
   <APageHeader :title="title" @back="() => $router.back()">
     <template slot="extra">
-      <AButton
-        type="primary"
-        :disabled="!editable"
-        @click="$router.push(`${$route.path}/form`)"
-      >
-        Создать
+      <AButton type="primary" :disabled="!editable">
+        <NuxtLink :to="`${$route.path}/form`"> Создать </NuxtLink>
       </AButton>
     </template>
     <DataTable
@@ -30,10 +26,10 @@
 import titleAndEditable from '~/mixins/titleAndEditable'
 
 export default {
-  name: 'SettingItemPrices',
+  name: 'ReturnOfGoodsFromTheBuyer',
   mixins: [titleAndEditable],
   data: () => ({
-    nameOfObject: 'УстановкаЦенНоменклатуры',
+    nameOfObject: 'ВозвратТоваровОтПокупателя',
     typeOfObject: 'Документы',
   }),
 }

@@ -1,7 +1,13 @@
 <template>
-  <ALayoutSider v-model="collapsed" collapsible width="300">
+  <ALayoutSider
+    :collapsed="collapsed"
+    class="custom-sider"
+    :trigger="null"
+    collapsible
+  >
     <AMenu
       v-model="selectedKeys"
+      class="custom-menu"
       theme="dark"
       mode="inline"
       @click="(event) => $router.push(event.key)"
@@ -19,7 +25,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-const navigationItems = require('@/assets/navigationRoutes.json')
+const navigationItems = require('~/assets/navigationRoutes.json')
 
 export interface NavItemInterface {
   id: string
@@ -32,9 +38,11 @@ const getParentPath = (route: { path: string }) =>
   `/${route.path.split('/').splice(1, 2).join('/')}`
 
 export default Vue.extend({
+  props: {
+    collapsed: { type: Boolean },
+  },
   data() {
     return {
-      collapsed: false,
       selectedKeys: [getParentPath(this.$route)] as Array<string>,
       navigationItems: navigationItems as NavItemInterface[],
     }
@@ -48,3 +56,12 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style scoped>
+.custom-sider {
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: auto !important;
+  flex: 0 0 auto !important;
+}
+</style>

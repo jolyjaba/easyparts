@@ -79,7 +79,7 @@ export default {
               {
                 key: 'ТипЦены',
                 value: this.dynamicForm.keys.find(({ key }) => key === 'ТипЦен')
-                  .value,
+                  ?.value,
               },
               { key: 'Номенклатуры', value: '' },
             ],

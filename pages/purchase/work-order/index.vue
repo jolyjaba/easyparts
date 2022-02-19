@@ -36,11 +36,5 @@ export default {
     nameOfObject: 'НарядНаРаботы',
     typeOfObject: 'Документы',
   }),
-  methods: {
-    copyHandler(record) {
-      const { $router, $route } = this
-      $router.push(`${$route.path}/form/create-from-copy/${record.Ссылка}`)
-    },
-  },
 }
 </script>

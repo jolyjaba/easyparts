@@ -56,6 +56,10 @@ export default {
     },
   },
   methods: {
+    copyHandler(record) {
+      const { $router, $route } = this
+      $router.push(`${$route.path}/form/create-from-copy/${record.Ссылка}`)
+    },
     onClick(route) {
       const { $route, $router, routes } = this
       const guid = $route.params.GUID
