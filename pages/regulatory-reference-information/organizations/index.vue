@@ -1,31 +1,9 @@
 <template>
-  <APageHeader :title="title" @back="() => $router.back()">
-    <template slot="extra">
-      <AButton
-        type="primary"
-        :disabled="!editable"
-        @click="$router.push(`${$route.path}/form`)"
-      >
-        Создать
-      </AButton>
-    </template>
-    <DataTable
-      :editable="editable"
-      :name-of-object="nameOfObject"
-      :type-of-object="typeOfObject"
-    />
-  </APageHeader>
+  <MainTableLayout name-of-object="Организации" type-of-object="Справочники" />
 </template>
 
 <script>
-import titleAndEditable from '~/mixins/titleAndEditable'
-
 export default {
   name: 'OrganizationPage',
-  mixins: [titleAndEditable],
-  data: () => ({
-    nameOfObject: 'Организации',
-    typeOfObject: 'Справочники',
-  }),
 }
 </script>
