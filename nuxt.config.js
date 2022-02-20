@@ -1,4 +1,5 @@
 // import { defineNuxtConfig } from '@nuxt/bridge'
+import { ContextReplacementPlugin } from 'webpack'
 
 export default {
   ssr: false,
@@ -22,10 +23,15 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['ant-design-vue/dist/antd.css'],
+  css: [
+    'ant-design-vue/dist/antd.css'
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/antd-ui', '@/plugins/axios'],
+  plugins: [
+    '@/plugins/antd-ui',
+    '@/plugins/axios',
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -51,7 +57,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://luxdamore.github.io/nuxt-prune-html/
-    '@luxdamore/nuxt-prune-html'
+    '@luxdamore/nuxt-prune-html',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -61,5 +67,22 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    // babel: {
+    //   plugins: [
+    //     [
+    //       'import',
+    //       {
+    //         libraryName: 'ant-design-vue',
+    //         libraryDirectory: 'es',
+    //         style: 'css',
+    //       },
+    //     ], // `style: true` for less
+    //   ],
+    // },
+    plugins: [
+      new ContextReplacementPlugin(/moment[/\\]locale$/, /ru/),
+      new ContextReplacementPlugin(/ant-design-vue[/\\]locale$/, /ru_RU/),
+    ],
+  },
 }

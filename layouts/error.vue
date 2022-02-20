@@ -11,8 +11,13 @@
 </template>
 
 <script>
+import { Button, Result } from 'ant-design-vue'
 export default {
   name: 'ErrorLayout',
+  components: {
+    AResult: Result,
+    AButton: Button,
+  },
   props: {
     error: { type: Object, required: true },
   },

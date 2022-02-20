@@ -1,3 +1,7 @@
+<template>
+  <a-layout> </a-layout>
+</template>
+
 <script lang="ts">
 import Vue from 'vue'
 

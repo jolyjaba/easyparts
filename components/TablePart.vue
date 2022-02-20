@@ -99,8 +99,8 @@
               <ASelect
                 v-else-if="column.Тип[0].includes('Перечисление.')"
                 v-model="record[column.key].dynamicForm.value"
-                style="width: 315px"
                 :placeholder="column.Синоним"
+                style="width: 315px"
                 allow-clear
               >
                 <ASelectOption
