@@ -24,23 +24,23 @@
       ref="tabs"
       v-model="tablePartData"
       has-multiselect
-      :synchronize-cols="synchronizeCols"
       multiselect-col="Номенклатура"
       :type-of-object="typeOfObject"
       :name-of-object="nameOfObject"
+      :synchronize-cols="synchronizeCols"
       :table-part-filters="tablePartFilters"
     />
   </APageHeader>
 </template>
 
 <script>
-import createCopyForm from '~/mixins/createCopyForm'
+import editForm from '~/mixins/editForm'
 
 export default {
-  name: 'SaleOfGoodsCreateFromCopyForm',
-  mixins: [createCopyForm],
+  name: 'PaymentOrderOutgoingEditForm',
+  mixins: [editForm],
   data: () => ({
-    nameOfObject: 'РеализацияТоваров',
+    nameOfObject: 'ПлатежноеПоручениеИсходящее',
     typeOfObject: 'Документы',
   }),
   computed: {
@@ -122,7 +122,7 @@ export default {
     onChangeRelation(filter) {
       this.dynamicForm.keys = this.dynamicForm.keys.map(({ key, value }) => ({
         key,
-        value: key === filter.relation ? '' : value,
+        value: key.includes(filter.relation) ? '' : value,
       }))
     },
   },

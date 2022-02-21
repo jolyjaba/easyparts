@@ -37,10 +37,10 @@
 import createCopyForm from '~/mixins/createCopyForm'
 
 export default {
-  name: 'SaleOfGoodsCreateFromCopyForm',
+  name: 'PaymentOrderOutgoingCreateFromCopyForm',
   mixins: [createCopyForm],
   data: () => ({
-    nameOfObject: 'РеализацияТоваров',
+    nameOfObject: 'ПлатежноеПоручениеИсходящее',
     typeOfObject: 'Документы',
   }),
   computed: {
@@ -122,7 +122,7 @@ export default {
     onChangeRelation(filter) {
       this.dynamicForm.keys = this.dynamicForm.keys.map(({ key, value }) => ({
         key,
-        value: key === filter.relation ? '' : value,
+        value: key.includes(filter.relation) ? '' : value,
       }))
     },
   },

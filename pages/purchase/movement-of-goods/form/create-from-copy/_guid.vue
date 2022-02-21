@@ -31,7 +31,7 @@
 import createCopyForm from '~/mixins/createCopyForm'
 
 export default {
-  name: 'MovementOfGoodsEditForm',
+  name: 'MovementOfGoodsCreateFromCopyForm',
   mixins: [createCopyForm],
   data: () => ({
     nameOfObject: 'ПеремещениеТоваров',

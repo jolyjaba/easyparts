@@ -31,7 +31,7 @@
 import createCopyForm from '~/mixins/createCopyForm'
 
 export default {
-  name: 'WorkOrderEditForm',
+  name: 'WorkOrderCreateFromCopyForm',
   mixins: [createCopyForm],
   data: () => ({
     nameOfObject: 'НарядНаРаботы',

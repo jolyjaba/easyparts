@@ -6,9 +6,7 @@
           Провести и закрыть
         </AButton>
         <AButton :loading="loading" @click="writeHandle"> Записать </AButton>
-        <AButton :loading="loading" :disabled="posted" @click="postDocument">
-          {{ posted ? 'Проведен' : 'Провести' }}
-        </AButton>
+        <AButton :loading="loading" @click="postDocument"> Провести </AButton>
       </AButtonGroup>
     </template>
     <Form
@@ -24,23 +22,23 @@
       ref="tabs"
       v-model="tablePartData"
       has-multiselect
-      :synchronize-cols="synchronizeCols"
       multiselect-col="Номенклатура"
       :type-of-object="typeOfObject"
       :name-of-object="nameOfObject"
+      :synchronize-cols="synchronizeCols"
       :table-part-filters="tablePartFilters"
     />
   </APageHeader>
 </template>
 
 <script>
-import createCopyForm from '~/mixins/createCopyForm'
+import createForm from '~/mixins/createForm'
 
 export default {
-  name: 'SaleOfGoodsCreateFromCopyForm',
-  mixins: [createCopyForm],
+  name: 'PaymentOrderOutgoingCreateForm',
+  mixins: [createForm],
   data: () => ({
-    nameOfObject: 'РеализацияТоваров',
+    nameOfObject: 'ПлатежноеПоручениеИсходящее',
     typeOfObject: 'Документы',
   }),
   computed: {
@@ -91,10 +89,11 @@ export default {
       return [nomenclatureToVatRate]
     },
     filters() {
-      const filter = this.dynamicForm.keys.find(
-        ({ key }) => key === 'Контрагент'
-      )
-      return [{ ...filter, relation: 'Договор' }]
+      const counterParty = {
+        ...this.dynamicForm.keys.find(({ key }) => key === 'Контрагент'),
+        relation: 'Договор',
+      }
+      return [counterParty]
     },
   },
   watch: {
@@ -117,12 +116,36 @@ export default {
         }
       },
     },
+    warehouses: {
+      handler(val) {
+        this.dynamicForm = {
+          keys: this.dynamicForm.keys.map((item) => {
+            const key = item.key
+            const obj = val.find((warehouse) => warehouse[key] !== undefined)
+            const value = obj?.[key] || item.value
+            if (val.some((obj) => obj[key] !== undefined)) {
+              this.selectOptions = {
+                ...this.selectOptions,
+                Склады: [
+                  ...this.selectOptions.Склады,
+                  {
+                    Ссылка: obj[key],
+                    Представление: obj[key + 'Представление'],
+                  },
+                ],
+              }
+            }
+            return { ...item, value }
+          }),
+        }
+      },
+    },
   },
   methods: {
     onChangeRelation(filter) {
       this.dynamicForm.keys = this.dynamicForm.keys.map(({ key, value }) => ({
         key,
-        value: key === filter.relation ? '' : value,
+        value: key.includes(filter.relation) ? '' : value,
       }))
     },
   },

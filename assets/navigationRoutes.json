@@ -13,7 +13,7 @@
       {
         "key": "/purchase/return-of-goods-from-the-buyer",
         "icon": "undo",
-        "title": "Возврат Товаров От Покупателя",
+        "title": "Возврат товаров от покупателя",
         "children": []
       },
       {
@@ -29,9 +29,33 @@
         "children": []
       },
       {
+        "key": "/purchase/payment-order-incoming",
+        "icon": "login",
+        "title": "Платежное поручение входящее",
+        "children": []
+      },
+      {
+        "key": "/purchase/payment-order-outgoing",
+        "icon": "logout",
+        "title": "Платежное поручение исходящее",
+        "children": []
+      },
+      {
         "key": "/purchase/reciept-of-goods",
         "icon": "import",
         "title": "Поступление товаров",
+        "children": []
+      },
+      {
+        "key": "/purchase/incoming-cash-order",
+        "icon": "shrink",
+        "title": "Приходный кассовый ордер",
+        "children": []
+      },
+      {
+        "key": "/purchase/account-cash-warrant",
+        "icon": "arrows-alt",
+        "title": "Расходный кассовый ордер",
         "children": []
       },
       {
@@ -104,6 +128,12 @@
         "children": []
       },
       {
+        "key": "/regulatory-reference-information/bank-accounts",
+        "icon": "bank",
+        "title": "Банковские Счета",
+        "children": []
+      },
+      {
         "key": "/regulatory-reference-information/currencies",
         "icon": "dollar",
         "title": "Валюты",
@@ -116,9 +146,27 @@
         "children": []
       },
       {
+        "key": "/regulatory-reference-information/positions-of-organizations",
+        "icon": "contacts",
+        "title": "Должности организаций",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/additional-reports-and-processing",
+        "icon": "file-add",
+        "title": "Дополнительные отчеты и обработки",
+        "children": []
+      },
+      {
         "key": "/regulatory-reference-information/units",
         "icon": "column-width",
         "title": "Единицы измерения",
+        "children": []
+      },
+      {
+        "key": "/regulatory-reference-information/cashbox",
+        "icon": "inbox",
+        "title": "Кассы",
         "children": []
       },
       {

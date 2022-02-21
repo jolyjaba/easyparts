@@ -32,7 +32,7 @@
 import createCopyForm from '~/mixins/createCopyForm'
 
 export default {
-  name: 'SettingItemPricesEditForm',
+  name: 'SettingItemPricesCreateFromCopyForm',
   mixins: [createCopyForm],
   data: () => ({
     nameOfObject: 'УстановкаЦенНоменклатуры',
