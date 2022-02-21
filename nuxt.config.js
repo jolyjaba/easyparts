@@ -11,7 +11,7 @@ export default {
   loadingIndicator: {
     name: 'three-bounce',
     color: '#1890ff',
-    background: 'white'
+    background: 'white',
   },
   // bridge: {
   //   nitro: false,
@@ -63,6 +63,8 @@ export default {
     '@nuxtjs/axios',
     // https://luxdamore.github.io/nuxt-prune-html/
     '@luxdamore/nuxt-prune-html',
+    // https://v2.color-mode.nuxtjs.org
+    '@nuxtjs/color-mode',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

@@ -10,16 +10,14 @@
   </AResult>
 </template>
 
-<script>
-import { Button, Result } from 'ant-design-vue'
-export default {
+<script lang="ts">
+import Vue, { PropOptions } from 'vue'
+import { IError } from '~/types/error'
+
+export default Vue.extend({
   name: 'ErrorLayout',
-  components: {
-    AResult: Result,
-    AButton: Button,
-  },
   props: {
-    error: { type: Object, required: true },
+    error: { type: Object, required: true } as PropOptions<IError>,
   },
-}
+})
 </script>
