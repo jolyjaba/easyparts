@@ -3,6 +3,16 @@ import { ContextReplacementPlugin } from 'webpack'
 
 export default {
   ssr: false,
+  loading: {
+    continuous: true,
+    color: '#1890ff',
+    height: '5px',
+  },
+  loadingIndicator: {
+    name: 'three-bounce',
+    color: '#1890ff',
+    background: 'white'
+  },
   // bridge: {
   //   nitro: false,
   //   typescript: false,
@@ -23,15 +33,10 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    'ant-design-vue/dist/antd.css'
-  ],
+  css: ['ant-design-vue/dist/antd.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '@/plugins/antd-ui',
-    '@/plugins/axios',
-  ],
+  plugins: ['@/plugins/antd-ui', '@/plugins/axios'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

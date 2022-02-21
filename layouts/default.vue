@@ -18,7 +18,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import ruRu from 'ant-design-vue/lib/locale/ru_RU'
+import ruRu from 'ant-design-vue/es/locale/ru_RU'
 
 export default {
   name: 'DefaultLayout',
