@@ -4,11 +4,20 @@
       <NavigationTree :collapsed="collapsed" />
       <ALayout>
         <ALayoutHeader class="custom-layout-header">
-          <AIcon
-            class="trigger"
-            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-            @click="() => (collapsed = !collapsed)"
-          />
+          <ARow type="flex" justify="space-between">
+            <ACol>
+              <AIcon
+                class="trigger"
+                :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+                @click="() => (collapsed = !collapsed)"
+              />
+            </ACol>
+            <ACol>
+              <AButton class="logout-btn" icon="logout" @click="logout">
+                Выйти
+              </AButton>
+            </ACol>
+          </ARow>
         </ALayoutHeader>
         <Nuxt class="custom-nuxt-layout" />
       </ALayout>
@@ -18,7 +27,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import ruRu from 'ant-design-vue/es/locale/ru_RU'
+import ruRu from 'ant-design-vue/lib/locale/ru_RU'
 
 export default {
   name: 'DefaultLayout',
@@ -46,7 +55,7 @@ export default {
     ],
   }),
   computed: {
-    ...mapGetters(['appState']),
+    ...mapGetters({ appState: 'appState' }),
   },
   watch: {
     appState: {
@@ -66,10 +75,16 @@ export default {
       },
     },
   },
+  methods: {
+    logout() {
+      localStorage.removeItem('user')
+      this.$router.replace({ path: '/login' })
+    },
+  },
 }
 </script>
 
-<style scoped>
+<style>
 .custom-layout {
   min-height: 100vh;
 }
@@ -86,5 +101,9 @@ export default {
 .trigger {
   font-size: 18px;
   padding: 0 24px;
+}
+
+.logout-btn {
+  margin: 0 24px;
 }
 </style>

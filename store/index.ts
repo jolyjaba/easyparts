@@ -65,13 +65,17 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async nuxtClientInit({ dispatch }) {
-    await dispatch('fetchMetadata')
+  async nuxtClientInit(ctx) {
+    const user = localStorage.getItem('user')
+    if (user) {
+      await ctx.dispatch('fetchMetadata')
+    }
   },
 
   async fetchMetadata({ commit }) {
     const data = await this.$axios.$post('/Метаданные')
     commit('SET_METADATA', data)
+    return data
   },
 
   async fetchOrWriteObject({ commit }, payload: PayloadParams) {

@@ -43,6 +43,7 @@ export default {
 
   router: {
     mode: 'hash',
+    middleware: ['auth']
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -61,8 +62,8 @@ export default {
     'nuxt-client-init-module',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    // https://luxdamore.github.io/nuxt-prune-html/
-    '@luxdamore/nuxt-prune-html',
+    // https://dev.auth.nuxtjs.org
+    // '@nuxtjs/auth-next',
     // https://v2.color-mode.nuxtjs.org
     '@nuxtjs/color-mode',
   ],

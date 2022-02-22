@@ -9,11 +9,14 @@ function unicodeUnEscape(string: string) {
 
 const axios: Plugin = ({ $axios, store }) => {
   $axios.onRequest((req) => {
-    const auth = 'Пользователь компании 1:123'
-    const USRPWD = `${encode(unicodeUnEscape(encodeURIComponent(auth)))}`
-    req.headers = {
-      USRPWD,
-      DEBUG: true,
+    const user = JSON.parse(localStorage.getItem('user') || '{}')
+    if (user.user && user.password) {
+      const auth = `${user.user}:${user.password}`
+      const USRPWD = `${encode(unicodeUnEscape(encodeURIComponent(auth)))}`
+      req.headers = {
+        USRPWD,
+        DEBUG: true,
+      }
     }
   })
   $axios.onResponse((res) => {
