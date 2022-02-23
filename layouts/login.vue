@@ -14,8 +14,5 @@ export default {
   data: () => ({
     ruRu,
   }),
-  head() {
-    return { title: 'Авторизация' }
-  },
 }
 </script>
