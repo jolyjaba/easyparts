@@ -277,10 +277,15 @@ export default {
           (item) =>
             item.Порядок === rule.Порядок && item.Синоним !== rule.Синоним
         ).length + 1
+      const lastItem = rules[rules.length - 1].Порядок === rule.Порядок
       return duplicateCount > 1
         ? columnWrapperSpan / duplicateCount
-        : !!prevRule || !!nextRule
+        : nextRule
         ? columnWrapperSpan
+        : lastItem
+        ? prevRule
+          ? columnWrapperSpan
+          : columnWrapperSpan * 2
         : columnWrapperSpan * 2
     },
     format(value) {
