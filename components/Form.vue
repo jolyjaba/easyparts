@@ -159,6 +159,8 @@ export default {
                 ? -Infinity
                 : value.МинимальноеЗначение !== null
                 ? value.МинимальноеЗначение
+                : value.Обязательный
+                ? 1
                 : 0,
               max:
                 value.МаксимальноеЗначение !== null

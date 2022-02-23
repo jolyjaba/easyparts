@@ -414,11 +414,18 @@ export default {
       this.isVisible = true
     },
     validate() {
-      return this.$refs.tabs?.every((component) => {
-        let res
-        component.validate((valid) => (res = valid))
-        return res
-      })
+      return (
+        this.$refs.tabs &&
+        this.$refs.tabs.every(async (col) => await col.validate()) &&
+        this.$refs.tabs.every((component) => {
+          let valid = false
+          component.validate((res) => {
+            valid = res
+            return valid
+          })
+          return valid
+        })
+      )
     },
     getColumn(tab) {
       return Object.entries(tab.Реквизиты).map(([key, value]) => ({
@@ -428,6 +435,8 @@ export default {
           ? -Infinity
           : value.МинимальноеЗначение !== null
           ? value.МинимальноеЗначение
+          : value.Обязательный
+          ? 1
           : 0,
         max:
           value.МаксимальноеЗначение !== null
