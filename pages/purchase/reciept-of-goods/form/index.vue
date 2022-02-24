@@ -145,7 +145,7 @@ export default {
     onChangeRelation(filter) {
       this.dynamicForm.keys = this.dynamicForm.keys.map(({ key, value }) => ({
         key,
-        value: key === filter.relation ? '' : value,
+        value: key.includes(filter.relation) ? '' : value,
       }))
     },
   },

@@ -53,6 +53,7 @@
             :model="record[column.key].dynamicForm"
           >
             <AFormModelItem
+              v-if="column.Тип[0] !== 'Число'"
               class="custom-form-model-item"
               :required="column.Обязательный"
               :prop="column.prop"
@@ -116,18 +117,25 @@
                 v-model="record[column.key].dynamicForm.value"
                 @change="onChange(record)"
               />
-              <AInputNumber
-                v-else-if="column.Тип[0] === 'Число'"
-                v-model="record[column.key].dynamicForm.value"
-                :placeholder="column.Синоним"
-                :min="column.min"
-                :max="column.max"
-                @change="onChange(record)"
-              />
               <AInput
                 v-else-if="column.Тип[0] === 'Строка'"
                 v-model="record[column.key].dynamicForm.value"
                 :placeholder="column.Синоним"
+                @change="onChange(record)"
+              />
+            </AFormModelItem>
+            <AFormModelItem
+              v-else
+              :prop="column.prop"
+              :rules="getRules(column)"
+              :required="column.Обязательный"
+              class="custom-form-model-item"
+            >
+              <AInputNumber
+                v-model="record[column.key].dynamicForm.value"
+                :placeholder="column.Синоним"
+                :min="column.min"
+                :max="column.max"
                 @change="onChange(record)"
               />
             </AFormModelItem>
@@ -295,6 +303,13 @@ export default {
     },
   },
   methods: {
+    getRules(column) {
+      return {
+        type: 'number',
+        required: column.Обязательный,
+        min: column.Обязательный ? 1 : 0,
+      }
+    },
     getValueFormat(type) {
       if (type.ЧастиДаты === 'Дата') return 'YYYY-MM-DD'
       else if (type.ЧастиДаты === 'Время') return 'HH:mm:ss'
@@ -435,8 +450,6 @@ export default {
           ? -Infinity
           : value.МинимальноеЗначение !== null
           ? value.МинимальноеЗначение
-          : value.Обязательный
-          ? 1
           : 0,
         max:
           value.МаксимальноеЗначение !== null
