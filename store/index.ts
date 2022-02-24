@@ -1,56 +1,11 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
+import { IPayload } from '~/types/payloadParams'
+import createFormData from '~/utils/createFormData'
 
 export const state = () => ({
   metadata: { Данные: null },
   appState: null,
 })
-
-export interface Payload {
-  nameOfObject: string
-  typeOfObject: string
-  commitType?: string
-  action: string
-  guid?: string
-  params?: {}
-  obj?: {}
-}
-
-export interface PayloadParams {
-  formObj?: { keys: [] }
-  typeOfObject: string
-  nameOfObject: string
-  commitType?: string
-  ЭтоГруппа?: boolean
-  action: string
-  guid?: string
-  params?: {}
-}
-
-export const createFormData = ({
-  typeOfObject,
-  nameOfObject,
-  commitType,
-  ЭтоГруппа,
-  formObj,
-  params,
-  action,
-  guid,
-}: PayloadParams) => {
-  const formData = { ЭтоГруппа }
-  formObj?.keys?.forEach(({ key, value }) => {
-    formData[key] = value
-  })
-  const payload = {
-    typeOfObject,
-    nameOfObject,
-    commitType,
-    formData,
-    params,
-    action,
-    guid,
-  }
-  return payload
-}
 
 export type RootState = ReturnType<typeof state>
 
@@ -65,10 +20,10 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async nuxtClientInit(ctx) {
+  async nuxtClientInit({ dispatch }) {
     const user = localStorage.getItem('user')
     if (user) {
-      await ctx.dispatch('fetchMetadata')
+      await dispatch('fetchMetadata')
     }
   },
 
@@ -78,35 +33,25 @@ export const actions: ActionTree<RootState, RootState> = {
     return data
   },
 
-  async fetchOrWriteObject({ commit }, payload: PayloadParams) {
-    const { typeOfObject, nameOfObject, action, params, formData, commitType } =
+  async fetchOrWriteObject(_, payload: IPayload) {
+    const { typeOfObject, nameOfObject, action, params, formData } =
       createFormData(payload)
     const url = `/${typeOfObject}/${nameOfObject}/${action}`
     const data = await this.$axios.$post(url, { ...params, ...formData })
-    commitType && commit(commitType, data)
     return data
   },
 
-  async getOrUpdateObject({ commit }, payload: PayloadParams) {
-    const {
-      typeOfObject,
-      nameOfObject,
-      action,
-      guid,
-      params,
-      formData,
-      commitType,
-    } = createFormData(payload)
+  async getOrUpdateObject(_, payload: IPayload) {
+    const { typeOfObject, nameOfObject, action, guid, params, formData } =
+      createFormData(payload)
     const url = `/${typeOfObject}/${nameOfObject}/${guid}/${action}`
     const data = await this.$axios.$post(url, { ...params, ...formData })
-    commitType && commit(commitType, data)
     return data
   },
 
-  async fetchByAPI({ commit }, payload: Payload) {
-    const { action, commitType, params } = payload
+  async fetchByAPI(_, payload: IPayload) {
+    const { action, params } = payload
     const data = await this.$axios.$post(`/API/${action}`, params)
-    commitType && commit(commitType, data)
     return data
   },
 }

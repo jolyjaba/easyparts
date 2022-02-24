@@ -144,14 +144,16 @@ export default {
       }
     },
     async postAndCloseHandle() {
-      const { writeHandle, $router } = this
+      const { writeHandle, postDocument, $router } = this
       const succes = await writeHandle()
       if (succes) {
-        await this.postDocument()
-        $router.back()
+        const posted = await postDocument({ close: true })
+        if (posted) {
+          $router.back()
+        }
       }
     },
-    async postDocument() {
+    async postDocument({ close } = { close: false }) {
       if (!this.posted) {
         const {
           $store,
@@ -168,9 +170,16 @@ export default {
           typeOfObject,
           guid,
         }
-        await $store.dispatch('getOrUpdateObject', payload)
-        $fetch()
+        const { Ошибка } = await $store.dispatch('getOrUpdateObject', payload)
+        if (!Ошибка) {
+          if (close) {
+            return true
+          }
+          $fetch()
+        }
+        return false
       }
+      return true
     },
     async writeHandle() {
       const {

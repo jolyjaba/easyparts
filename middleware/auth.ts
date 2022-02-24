@@ -8,6 +8,9 @@ const auth: Middleware = (ctx) => {
       ctx.redirect('/login')
     }
   }
+  if (currentPath === '/') {
+    ctx.redirect(encodeURI('/Главная'))
+  }
 }
 
 export default auth

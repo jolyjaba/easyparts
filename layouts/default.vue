@@ -40,7 +40,7 @@ export default {
   },
   data: () => ({
     ruRu,
-    collapsed: true,
+    collapsed: false,
     modalTableRoutes: [
       {
         path: '00000000-0000-0000-0000-000000000000',

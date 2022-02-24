@@ -15,15 +15,14 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions } from 'vue'
-import { NavItemInterface } from './NavigationTree.vue'
+import Vue from 'vue'
 
 export default Vue.extend({
   props: {
     menuInfo: {
       type: Object,
       required: true,
-    } as PropOptions<NavItemInterface>,
+    },
   },
 })
 </script>

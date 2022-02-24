@@ -4,7 +4,6 @@
     row-key="Ссылка"
     :columns="columns"
     :scroll="{ x: true }"
-    :custom-row="customRow"
     :pagination="pagination"
     :data-source="dataSource"
     :loading="$fetchState.pending"
@@ -19,30 +18,25 @@
       <span v-if="col.scopedSlots.customRender === 'Дата'" :key="index">
         {{ moment(text).format('DD.MM.YYYY HH:mm:ss') }}
       </span>
-      <AButtonGroup
+      <ADropdown
         v-else-if="col.scopedSlots.customRender === 'operation'"
         :key="index"
       >
-        <AButton
-          icon="edit"
-          type="primary"
-          title="Редактировать"
-          @click="editHandler(record)"
-        />
-        <slot :record="record" name="actions" />
-        <APopconfirm
-          ok-text="Да"
-          cancel-text="Нет"
-          :title="`${getTitle(record)}?`"
-          @confirm="markForDelete(record)"
-        >
-          <AButton
-            :title="getTitle(record)"
-            :type="record.ПометкаУдаления ? 'default' : 'danger'"
-            :icon="record.ПометкаУдаления ? 'rollback' : 'tag'"
-          />
-        </APopconfirm>
-      </AButtonGroup>
+        <AMenu slot="overlay">
+          <AMenuItem key="edit">
+            <NuxtLink tag="span" :to="`${path}/form/${record.Ссылка}`">
+              <AIcon type="edit" />
+              Редактировать
+            </NuxtLink>
+          </AMenuItem>
+          <slot :record="record" name="actions" />
+          <AMenuItem key="mark" @click="onClickMenu(record)">
+            <AIcon :type="record.ПометкаУдаления ? 'rollback' : 'tag'" />
+            {{ getTitle(record) }}
+          </AMenuItem>
+        </AMenu>
+        <AButton icon="ellipsis" />
+      </ADropdown>
       <AIcon
         v-else-if="col.scopedSlots.customRender === 'markDeletion'"
         :key="index"
@@ -224,6 +218,12 @@ export default {
     },
   },
   methods: {
+    onClickMenu(record) {
+      this.$confirm({
+        title: `${this.getTitle(record)}?`,
+        onOk: async () => await this.markForDelete(record),
+      })
+    },
     getTitle(record) {
       return record.ПометкаУдаления
         ? 'Снять пометку на удаление'
@@ -252,13 +252,13 @@ export default {
       await $store.dispatch('getOrUpdateObject', payload)
       $fetch()
     },
-    onExpand(_, record) {
+    async onExpand(_, record) {
       const { $router, path } = this
-      $router.push(`${path}/${record.Ссылка}`)
+      await $router.push(`${path}/${record.Ссылка}`)
     },
-    editHandler(record) {
+    async editHandler(record) {
       const { $router, path } = this
-      $router.push(`${path}/form/${record.Ссылка}`)
+      await $router.push(`${path}/form/${record.Ссылка}`)
     },
     onTableChange(pagination) {
       this.pagination = { ...pagination }

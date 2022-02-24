@@ -1,13 +1,9 @@
 <template>
   <APageHeader :title="title" @back="() => $router.back()">
     <template slot="extra">
-      <AButton
-        type="primary"
-        :disabled="!editable"
-        @click="$router.push(`${$route.path}/form`)"
-      >
-        Создать
-      </AButton>
+      <NuxtLink :to="`${$route.fullPath}/form`">
+        <AButton type="primary" :disabled="!editable"> Создать </AButton>
+      </NuxtLink>
     </template>
     <DataTable
       :editable="editable"
@@ -15,13 +11,15 @@
       :type-of-object="typeOfObject"
     >
       <template slot="actions" slot-scope="{ record }">
-        <AButton
-          v-if="hasCopyButton"
-          title="Создать новую копию"
-          type="primary"
-          icon="copy"
-          @click="copyHandler(record)"
-        />
+        <AMenuItem v-if="hasCopyButton" key="copy">
+          <NuxtLink
+            tag="span"
+            :to="`${$route.path}/form/create-from-copy/${record.Ссылка}`"
+          >
+            <AIcon type="copy" />
+            Создать копию
+          </NuxtLink>
+        </AMenuItem>
       </template>
     </DataTable>
   </APageHeader>
@@ -35,7 +33,12 @@ export default {
   mixins: [titleAndEditable],
   props: {
     hasCopyButton: { type: Boolean },
-    nameOfObject: { type: String, reqired: true, default: () => '' },
+    nameOfObject: {
+      type: String,
+      default() {
+        return this.$route.name.split('-')[1]
+      },
+    },
     typeOfObject: { type: String, reqired: true, default: () => '' },
   },
 }

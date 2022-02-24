@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import defaultMessages from '~/enums/defaultMessages'
+
 export default {
   name: 'LoginPage',
   layout: 'login',
@@ -65,12 +67,20 @@ export default {
   methods: {
     async handleSubmit() {
       localStorage.setItem('user', JSON.stringify(this.form))
-      const { Ошибка } = await this.$store.dispatch('fetchMetadata')
-      if (!Ошибка) {
-        this.$router.replace({ path: '/' })
-        return
+      try {
+        const { Ошибка } = await this.$store.dispatch('fetchMetadata')
+        if (!Ошибка) {
+          this.$router.replace(encodeURI('/Главная'))
+          return
+        }
+        localStorage.removeItem('user')
+      } catch (error) {
+        this.$error({
+          title: 'Ошибка авторизации',
+          content: defaultMessages.authError,
+        })
+        localStorage.removeItem('user')
       }
-      localStorage.removeItem('user')
     },
   },
 }
