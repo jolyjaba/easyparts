@@ -24,9 +24,15 @@
       >
         <AMenu slot="overlay">
           <AMenuItem key="edit">
-            <NuxtLink tag="span" :to="`${path}/form/${record.Ссылка}`">
-              <AIcon type="edit" />
-              Редактировать
+            <NuxtLink
+              v-slot="{ navigate }"
+              :to="`${path}/form/${record.Ссылка}`"
+              custom
+            >
+              <span @click="navigate">
+                <AIcon type="edit" />
+                Редактировать
+              </span>
             </NuxtLink>
           </AMenuItem>
           <slot :record="record" name="actions" />

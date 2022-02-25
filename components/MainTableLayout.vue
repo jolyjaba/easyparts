@@ -13,11 +13,14 @@
       <template slot="actions" slot-scope="{ record }">
         <AMenuItem v-if="hasCopyButton" key="copy">
           <NuxtLink
-            tag="span"
+            v-slot="{ navigate }"
+            custom
             :to="`${$route.path}/form/create-from-copy/${record.Ссылка}`"
           >
-            <AIcon type="copy" />
-            Создать копию
+            <span @click="navigate">
+              <AIcon type="copy" />
+              Создать копию
+            </span>
           </NuxtLink>
         </AMenuItem>
       </template>

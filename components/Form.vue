@@ -109,8 +109,8 @@
                 :params="params"
                 :filters="filters"
                 :is-group="isGroup"
-                :object-type="filteredRules[domain.key].Тип.split('.')[0]"
                 :filtered-rule="filteredRules[domain.key]"
+                :object-type="filteredRules[domain.key].Тип.split('.')[0]"
                 @select="onSelect($event, domain, filteredRules[domain.key])"
               />
             </AModal>
