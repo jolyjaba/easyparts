@@ -1,5 +1,5 @@
 <template>
-  <MainTableLayout type-of-object="Документы" has-copy-button />
+  <LazyMainTableLayout type-of-object="Документы" has-copy-button />
 </template>
 
 <script>

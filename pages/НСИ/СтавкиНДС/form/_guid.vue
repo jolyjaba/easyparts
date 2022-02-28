@@ -6,7 +6,7 @@
       </AButton>
       <AButton @click="writeHandle">Записать</AButton>
     </template>
-    <Form
+    <LazyForm
       v-if="!$fetchState.pending"
       ref="form"
       v-model="selectOptions"
@@ -14,7 +14,7 @@
       :is-group="isGroup"
       :rules="rules"
     />
-    <TablePart
+    <LazyTablePart
       ref="tabs"
       v-model="tablePartData"
       :type-of-object="typeOfObject"

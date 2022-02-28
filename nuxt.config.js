@@ -1,5 +1,6 @@
 // import { defineNuxtConfig } from '@nuxt/bridge'
 import { ContextReplacementPlugin } from 'webpack'
+import AntdDayjsWebpackPlugin from 'antd-dayjs-webpack-plugin'
 
 export default {
   ssr: false,
@@ -13,10 +14,6 @@ export default {
     color: '#1890ff',
     background: 'white',
   },
-  // bridge: {
-  //   nitro: false,
-  //   typescript: false,
-  // },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'easyparts',
@@ -71,7 +68,14 @@ export default {
     // '@nuxtjs/auth-next',
     // https://v2.color-mode.nuxtjs.org
     '@nuxtjs/color-mode',
+    // https://github.com/nuxt-community/dayjs-module
+    '@nuxtjs/dayjs',
   ],
+
+  dayjs: {
+    locales: ['ru'],
+    defaultLocale: 'ru',
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -81,20 +85,23 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    // babel: {
-    //   plugins: [
-    //     [
-    //       'import',
-    //       {
-    //         libraryName: 'ant-design-vue',
-    //         libraryDirectory: 'es',
-    //         style: 'css',
-    //       },
-    //     ], // `style: true` for less
-    //   ],
-    // },
     plugins: [
-      new ContextReplacementPlugin(/moment[/\\]locale$/, /ru/),
+      new AntdDayjsWebpackPlugin({
+        replaceMoment: true,
+        plugins: [
+          'isSameOrBefore',
+          'isSameOrAfter',
+          'advancedFormat',
+          'customParseFormat',
+          'weekday',
+          'weekYear',
+          'weekOfYear',
+          'isMoment',
+          'localeData',
+          'localizedFormat',
+          'badMutable',
+        ],
+      }),
       new ContextReplacementPlugin(/ant-design-vue[/\\]locale$/, /ru_RU/),
     ],
   },

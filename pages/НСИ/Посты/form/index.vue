@@ -6,7 +6,7 @@
       </AButton>
       <AButton @click="writeHandle">Записать</AButton>
     </template>
-    <Form
+    <LazyForm
       ref="form"
       v-model="selectOptions"
       :dynamic-form="dynamicForm"
@@ -14,7 +14,7 @@
       :params="params"
       :rules="rules"
     />
-    <TablePart
+    <LazyTablePart
       ref="tabs"
       v-model="tablePartData"
       :type-of-object="typeOfObject"

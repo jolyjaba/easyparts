@@ -8,7 +8,7 @@
         class="custom-sider"
         :theme="$colorMode.value"
       >
-        <NavigationTree />
+        <LazyNavigationTree />
       </ALayoutSider>
       <ALayout>
         <ALayoutHeader class="custom-layout-header">

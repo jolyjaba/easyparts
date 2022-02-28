@@ -1,5 +1,5 @@
 <template>
-  <MainTableLayout type-of-object="Справочники" />
+  <LazyMainTableLayout type-of-object="Справочники" />
 </template>
 
 <script>

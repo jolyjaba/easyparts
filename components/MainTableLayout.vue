@@ -5,7 +5,7 @@
         <AButton type="primary" :disabled="!editable"> Создать </AButton>
       </NuxtLink>
     </template>
-    <DataTable
+    <LazyDataTable
       :editable="editable"
       :name-of-object="nameOfObject"
       :type-of-object="typeOfObject"
@@ -24,7 +24,7 @@
           </NuxtLink>
         </AMenuItem>
       </template>
-    </DataTable>
+    </LazyDataTable>
   </APageHeader>
 </template>
 

@@ -11,7 +11,7 @@
         </AButton>
       </AButtonGroup>
     </template>
-    <Form
+    <LazyForm
       ref="form"
       v-model="selectOptions"
       :rules="rules"
@@ -19,7 +19,7 @@
       :filters="filters"
       :dynamic-form="dynamicForm"
     />
-    <TablePart
+    <LazyTablePart
       ref="tabs"
       v-model="tablePartData"
       has-multiselect

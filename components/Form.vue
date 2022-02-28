@@ -105,7 +105,7 @@
               :visible="filteredRules[domain.key].isShown"
               @cancel="cancel(filteredRules[domain.key])"
             >
-              <ModalTable
+              <LazyModalTable
                 :params="params"
                 :filters="filters"
                 :is-group="isGroup"

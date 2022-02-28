@@ -16,7 +16,7 @@
       slot-scope="text, record"
     >
       <span v-if="col.scopedSlots.customRender === 'Дата'" :key="index">
-        {{ moment(text).format('DD.MM.YYYY HH:mm:ss') }}
+        {{ $dayjs(text).format('DD.MM.YYYY HH:mm:ss') }}
       </span>
       <ADropdown
         v-else-if="col.scopedSlots.customRender === 'operation'"
@@ -65,7 +65,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import moment from 'moment'
 
 export default {
   name: 'DataTable',
@@ -84,7 +83,6 @@ export default {
   data() {
     const pageSizeOptions = ['10', '15', '20']
     return {
-      moment,
       dataSource: [],
       Значение: this.$route.params.GUID || 'GUID-0',
       pagination: {

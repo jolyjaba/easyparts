@@ -17,7 +17,7 @@
         Создать
       </AButton>
     </template>
-    <DataTable
+    <LazyDataTable
       :path="path"
       :editable="editable"
       :name-of-object="nameOfObject"

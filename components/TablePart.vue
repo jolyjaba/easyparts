@@ -10,7 +10,7 @@
           :visible="isVisible"
           @cancel="cancel"
         >
-          <ModalTable :filtered-rule="filteredRule" @select="onSelect" />
+          <LazyModalTable :filtered-rule="filteredRule" @select="onSelect" />
         </AModal>
         <AButton type="primary" @click="onAddRow"> Добавить </AButton>
         <AButton v-if="hasMultiselect" @click="onMultiselect"> Подбор </AButton>

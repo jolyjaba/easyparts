@@ -9,7 +9,7 @@
         <AButton :loading="loading" @click="postDocument"> Провести </AButton>
       </AButtonGroup>
     </template>
-    <Form
+    <LazyForm
       ref="form"
       v-model="selectOptions"
       :rules="rules"
@@ -18,7 +18,7 @@
       :dynamic-form="dynamicForm"
       @onChangeRelation="onChangeRelation"
     />
-    <TablePart
+    <LazyTablePart
       ref="tabs"
       v-model="tablePartData"
       has-multiselect

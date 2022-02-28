@@ -9,14 +9,14 @@
         <AButton :loading="loading" @click="postDocument"> Провести </AButton>
       </AButtonGroup>
     </template>
-    <Form
+    <LazyForm
       ref="form"
       v-model="selectOptions"
       :rules="rules"
       :params="params"
       :dynamic-form="dynamicForm"
     />
-    <TablePart
+    <LazyTablePart
       ref="tabs"
       v-model="tablePartData"
       :type-of-object="typeOfObject"

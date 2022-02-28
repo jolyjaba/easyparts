@@ -12,7 +12,7 @@
         <AIcon v-if="navigation.icon" :type="navigation.icon" />
         <span>{{ navigation.title }}</span>
       </AMenuItem>
-      <NavigationItem v-else :key="navigation.key" :menu-info="navigation" />
+      <LazyNavigationItem v-else :key="navigation.key" :menu-info="navigation" />
     </template>
   </AMenu>
 </template>

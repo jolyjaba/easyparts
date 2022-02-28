@@ -17,7 +17,7 @@
         Создать
       </AButton>
     </template>
-    <DataTable
+    <LazyDataTable
       :editable="editable"
       :name-of-object="nameOfObject"
       :type-of-object="typeOfObject"

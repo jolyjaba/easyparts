@@ -35,7 +35,7 @@
         slot-scope="text, record"
       >
         <span v-if="col.scopedSlots.customRender === 'Дата'" :key="index">
-          {{ moment(text).format('DD.MM.YYYY HH:mm:ss') }}
+          {{ $dayjs(text).format('DD.MM.YYYY HH:mm:ss') }}
         </span>
         <AButtonGroup
           v-else-if="col.scopedSlots.customRender === 'operation'"
@@ -72,7 +72,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import moment from 'moment'
 
 export default {
   name: 'ModalTable',
@@ -87,7 +86,6 @@ export default {
     objectType: { type: String, default: () => 'Справочники' },
   },
   data: () => ({
-    moment,
     dataSource: [],
     guidHistory: [],
     parentGuid: '00000000-0000-0000-0000-000000000000',
