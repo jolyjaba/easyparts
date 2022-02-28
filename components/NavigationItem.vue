@@ -1,5 +1,5 @@
 <template functional>
-  <ASubMenu :key="props.menuInfo.key">
+  <ASubMenu :key="props.menuInfo.key" popup-class-name="custom-sub-menu">
     <span slot="title">
       <AIcon v-if="props.menuInfo.icon" :type="props.menuInfo.icon" />
       <span>{{ props.menuInfo.title }}</span>
@@ -26,3 +26,10 @@ export default Vue.extend({
   },
 })
 </script>
+
+<style>
+.custom-sub-menu {
+  overflow: scroll;
+  max-height: 100vh;
+}
+</style>

@@ -1,14 +1,22 @@
 <template>
   <AConfigProvider :locale="ruRu">
     <ALayout :has-sider="true" class="custom-layout">
-      <NavigationTree :collapsed="collapsed" />
+      <ALayoutSider
+        v-model="collapsed"
+        collapsible
+        :trigger="null"
+        class="custom-sider"
+        :theme="$colorMode.value"
+      >
+        <NavigationTree />
+      </ALayoutSider>
       <ALayout>
         <ALayoutHeader class="custom-layout-header">
           <ARow type="flex" justify="space-between">
             <ACol>
               <AIcon
                 class="trigger"
-                :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+                :type="`menu-${collapsed ? 'un' : ''}fold`"
                 @click="() => (collapsed = !collapsed)"
               />
             </ACol>
@@ -19,7 +27,7 @@
             </ACol>
           </ARow>
         </ALayoutHeader>
-        <Nuxt class="custom-nuxt-layout" />
+        <Nuxt />
       </ALayout>
     </ALayout>
   </AConfigProvider>
@@ -85,6 +93,13 @@ export default {
 </script>
 
 <style>
+.custom-sider {
+  width: auto !important;
+  max-width: 100% !important;
+  min-width: auto !important;
+  flex: 0 0 auto !important;
+}
+
 .custom-layout {
   min-height: 100vh;
 }
@@ -92,10 +107,6 @@ export default {
 .custom-layout-header {
   background: white;
   padding: 0;
-}
-
-.custom-nuxt-layout {
-  min-height: 100vh;
 }
 
 .trigger {

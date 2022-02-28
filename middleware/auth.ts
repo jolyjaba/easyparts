@@ -6,6 +6,7 @@ const auth: Middleware = (ctx) => {
   if (user === null) {
     if (currentPath !== '/login') {
       ctx.redirect('/login')
+      return
     }
   }
   if (currentPath === '/') {

@@ -16,3 +16,9 @@ export default {
   }),
 }
 </script>
+
+<style scoped>
+.custom-nuxt-layout {
+  min-height: 100vh;
+}
+</style>
