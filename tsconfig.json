@@ -20,7 +20,8 @@
       "@nuxt/types",
       "@nuxtjs/axios",
       "@types/node",
-      "@nuxtjs/color-mode"
+      "@nuxtjs/color-mode",
+      "nuxt-webpack-optimisations"
     ]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]

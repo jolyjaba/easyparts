@@ -43,7 +43,7 @@ export default {
 
   router: {
     mode: 'hash',
-    middleware: ['auth']
+    middleware: ['auth'],
   },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -55,6 +55,11 @@ export default {
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
   ],
+
+  webpackOptimisations: {
+    hardSourcePlugin: process.env.NODE_ENV === 'development',
+    parallelPlugin: process.env.NODE_ENV === 'development',
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
