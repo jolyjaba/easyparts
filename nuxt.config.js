@@ -85,6 +85,16 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend(config) {
+      config.module.rules.push({
+        loader: 'webpack-ant-icon-loader',
+        enforce: 'pre',
+        // options: {
+        //   chunkName: 'antd-icons',
+        // },
+        include: [require.resolve('@ant-design/icons/lib')],
+      })
+    },
     plugins: [
       new AntdDayjsWebpackPlugin({
         replaceMoment: true,

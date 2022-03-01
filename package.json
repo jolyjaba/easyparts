@@ -15,6 +15,7 @@
     "lintfix": "prettier --write --list-different . && yarn lint:js --fix && yarn lint:style --fix"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^6.0.1",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/dayjs": "^1.4.1",
     "ant-design-vue": "^1.7.8",
@@ -50,6 +51,7 @@
     "stylelint": "^14.1.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended-vue": "^1.1.0",
-    "stylelint-config-standard": "^24.0.0"
+    "stylelint-config-standard": "^24.0.0",
+    "webpack-ant-icon-loader": "^1.0.8"
   }
 }
