@@ -157,8 +157,8 @@ export default {
   props: {
     hasMultiselect: { type: Boolean },
     multiselectCol: { type: String, default: '' },
-    synchronizeCols: { type: Object, default: null },
     tablePartData: { type: Object, required: true },
+    synchronizeCols: { type: Object, default: null },
     tablePartFilters: { type: Array, default: () => [] },
     typeOfObject: { type: String, reqired: true, default: () => '' },
     nameOfObject: { type: String, reqired: true, default: () => '' },

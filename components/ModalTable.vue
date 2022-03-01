@@ -258,10 +258,6 @@ export default {
         .map(([key, _]) => key)
       ДополнительныеПоля.push('ЭтоГруппа')
 
-      const Реквизит =
-        Object.entries(requisites).find(
-          ([, value]) => value.Тип === filteredRule.Тип
-        )?.[0] || filteredRule.Синоним
       const _params = []
       this.params.forEach((item) => {
         if (item.values.length && filteredRule.Синоним === item.key) {
@@ -275,7 +271,7 @@ export default {
       })
       const filters = []
       this.filters.forEach((filter) => {
-        if (filter.value && filteredRule.Синоним.includes(filter.relation)) {
+        if (filter.value && filteredRule.Синоним.includes(filter.synonym)) {
           filters.push({
             Реквизит: 'Владелец',
             Значение: filter.value,
@@ -285,17 +281,8 @@ export default {
         }
       })
       const params = {
-        ...(Реквизит === 'Родитель' && {
-          Фильтры: [
-            {
-              Группа: false,
-              Вид: '=',
-              Реквизит,
-              Значение: this.parentGuid,
-            },
-            ...filters,
-            ..._params,
-          ],
+        ...(filters.length && {
+          Фильтры: [...filters, ..._params],
         }),
         КоличествоЭлементовНаСтранице: pagination.pageSize,
         ТекущаяСтраница: pagination.current,

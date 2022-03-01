@@ -245,7 +245,7 @@ export default {
         this.getSelectOption[nameOfObject].push(event)
       }
       this.getSelectOption = { ...this.getSelectOption }
-      const foundFilter = this.filters.find(
+      const foundFilter = this.filters.filter(
         (filter) => filter.key === obj.Синоним
       )
       if (foundFilter) {

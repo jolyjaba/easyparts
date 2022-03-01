@@ -91,10 +91,13 @@ export default {
       return [nomenclatureToVatRate]
     },
     filters() {
-      const filter = this.dynamicForm.keys.find(
-        ({ key }) => key === 'Контрагент'
-      )
-      return [{ ...filter, relation: 'Договор' }]
+      const form = this.dynamicForm.keys.find(({ key }) => key === 'Контрагент')
+      const filter1 = {
+        ...form,
+        relation: 'Договор',
+        synonym: 'Договор контрагента',
+      }
+      return [filter1]
     },
   },
   watch: {
@@ -119,11 +122,13 @@ export default {
     },
   },
   methods: {
-    onChangeRelation(filter) {
-      this.dynamicForm.keys = this.dynamicForm.keys.map(({ key, value }) => ({
-        key,
-        value: key === filter.relation ? '' : value,
-      }))
+    onChangeRelation(filters) {
+      filters.forEach((filter) => {
+        this.dynamicForm.keys = this.dynamicForm.keys.map(({ key, value }) => ({
+          key,
+          value: key.includes(filter.relation) ? '' : value,
+        }))
+      })
     },
   },
 }
