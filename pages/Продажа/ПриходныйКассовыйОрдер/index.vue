@@ -1,5 +1,9 @@
 <template>
-  <LazyMainTableLayout type-of-object="Документы" has-copy-button />
+  <LazyMainTableLayout
+    type-of-object="Документы"
+    has-print-option
+    has-copy-button
+  />
 </template>
 
 <script>

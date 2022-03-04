@@ -12,7 +12,11 @@
         <AIcon v-if="navigation.icon" :type="navigation.icon" />
         <span>{{ navigation.title }}</span>
       </AMenuItem>
-      <LazyNavigationItem v-else :key="navigation.key" :menu-info="navigation" />
+      <LazyNavigationItem
+        v-else
+        :key="navigation.key"
+        :menu-info="navigation"
+      />
     </template>
   </AMenu>
 </template>
@@ -35,14 +39,14 @@ export default Vue.extend({
       const rotes = this.metadata.Подсистемы
       const obj = Object.keys(rotes).map((key) => ({
         key,
-        title: rotes[key].Настройки.Синоним,
         icon: rotes[key].Настройки.Картинка,
+        title: rotes[key].Настройки.Синоним,
         children: rotes[key].Состав.map(
           (item: { ИмяОбъекта: string; Синоним: string }) => ({
             key: item.ИмяОбъекта.split('.')[1],
             title: item.Синоним,
-            icon: null,
             children: [],
+            icon: null,
           })
         ),
       }))
@@ -57,11 +61,9 @@ export default Vue.extend({
         this.openKeys = []
       }
     },
-    onClick($event: any) {
-      const fullPath = `/${encodeURI($event.keyPath.reverse().join('/'))}`
-      if (fullPath !== this.$route.fullPath) {
-        this.$router.push(fullPath)
-      }
+    onClick($event: { keyPath: string[] }) {
+      const path = `/${encodeURI($event.keyPath.reverse().join('/'))}`
+      this.$router.push(path)
     },
   },
 })

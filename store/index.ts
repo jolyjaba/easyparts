@@ -15,8 +15,8 @@ export const getters: GetterTree<RootState, RootState> = {
 }
 
 export const mutations: MutationTree<RootState> = {
-  SET_APP_STATE: (state, payload) => (state.appState = payload),
   SET_METADATA: (state, payload) => (state.metadata = payload),
+  SET_APP_STATE: (state, payload) => (state.appState = payload),
 }
 
 export const actions: ActionTree<RootState, RootState> = {

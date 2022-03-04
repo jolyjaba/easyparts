@@ -6,6 +6,7 @@
     :scroll="{ x: true }"
     :pagination="pagination"
     :data-source="dataSource"
+    :row-selection="rowSelection"
     :loading="$fetchState.pending"
     @expand="onExpand"
     @change="onTableChange"
@@ -68,6 +69,10 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'DataTable',
+  model: {
+    prop: 'selectedRows',
+    event: 'change',
+  },
   props: {
     path: {
       type: String,
@@ -76,7 +81,9 @@ export default {
       },
     },
     editable: { type: Boolean },
+    hasPrintOption: { type: Boolean },
     markable: { type: Boolean, default: () => true },
+    selectedRows: { type: Array, default: () => [] },
     nameOfObject: { type: String, reqired: true, default: () => '' },
     typeOfObject: { type: String, reqired: true, default: () => '' },
   },
@@ -147,6 +154,18 @@ export default {
     ...mapGetters({
       metadata: 'metadata',
     }),
+    selectedRowKeys: {
+      get() {
+        return this.selectedRows
+      },
+      set(val) {
+        this.$emit('change', val)
+      },
+    },
+    rowSelection() {
+      const { selectedRowKeys, onChange } = this
+      return this.hasPrintOption ? { selectedRowKeys, onChange } : null
+    },
     customRow() {
       const { editable, dblClickHandler } = this
       return (record) => ({
@@ -222,6 +241,9 @@ export default {
     },
   },
   methods: {
+    onChange(selectedRowKeys) {
+      this.selectedRowKeys = selectedRowKeys
+    },
     onClickMenu(record) {
       this.$confirm({
         title: `${this.getTitle(record)}?`,

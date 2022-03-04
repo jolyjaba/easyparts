@@ -19,6 +19,12 @@ export default {
       nameOfObject,
       typeOfObject,
     } = this
+    // $store.dispatch('fetchByAPI', {
+    //   action: 'ПолучитьСписокПечатныхФорм',
+    //   params: {
+    //     Назначение: this.fullKey,
+    //   },
+    // })
     const guid = $route.params.GUID
     if (guid) {
       const index = routes.findIndex((item) => item.path === guid)
@@ -40,11 +46,28 @@ export default {
     } else {
       routes.splice(1)
     }
+    if (this.hasPrintOption) {
+      const { Данные } = await this.$store.dispatch('fetchByAPI', {
+        action: 'ПолучитьСписокПечатныхФорм',
+        params: {
+          Назначение: this.fullKey,
+        },
+      })
+      this.printObj = Данные
+    }
   },
   computed: {
     ...mapGetters({
       metadata: 'metadata',
     }),
+    fullKey() {
+      const { $route, metadata } = this
+      const [parentCategory, nameOfObject] = $route.name.split('-')
+      const found = metadata.Подсистемы[parentCategory].Состав.find(
+        (item) => item.ИмяОбъекта.split('.')[1] === nameOfObject
+      )
+      return found?.ИмяОбъекта || ''
+    },
     editable() {
       const { metadata, typeOfObject, nameOfObject } = this
       return metadata[typeOfObject][nameOfObject].Настройки

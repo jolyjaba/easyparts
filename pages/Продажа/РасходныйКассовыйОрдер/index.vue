@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  name: 'ReceiptOfGoods',
+  name: 'AccountCashWarrant',
 }
 </script>
