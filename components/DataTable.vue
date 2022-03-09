@@ -295,7 +295,9 @@ export default {
       if (sorter.columnKey === 'Комментарий') {
         return
       }
-      this.sortBy = sorter.columnKey
+      if (sorter?.columnKey !== undefined) {
+        this.sortBy = sorter.columnKey
+      }
       this.$fetch()
     },
     dblClickHandler(record) {
