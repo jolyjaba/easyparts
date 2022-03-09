@@ -90,6 +90,7 @@ export default {
   data() {
     const pageSizeOptions = ['10', '15', '20']
     return {
+      sortBy: 'Ссылка',
       dataSource: [],
       Значение: this.$route.params.GUID || 'GUID-0',
       pagination: {
@@ -113,6 +114,7 @@ export default {
       typeOfObject,
       Значение,
       isGroup,
+      sortBy,
     } = this
     pagination.disabled = true
     const ДополнительныеПоля = Object.entries(requisites)
@@ -134,7 +136,7 @@ export default {
       КоличествоЭлементовНаСтранице: pagination.pageSize,
       ТекущаяСтраница: pagination.current,
       ДополнительныеПоля,
-      Сортировка: ['Ссылка'],
+      Сортировка: [sortBy],
     }
     const { Данные } = await $store.dispatch('fetchOrWriteObject', {
       action: 'Получить',
@@ -210,6 +212,8 @@ export default {
         dataIndex: !typeExceptions.includes(value.Тип)
           ? `${key}Представление`
           : key,
+        sorter: true,
+        sortOrder: false,
         ellipsis: true,
         ...(['Булево', 'Дата'].includes(value.Тип) && {
           scopedSlots: { customRender: value.Тип },
@@ -286,8 +290,12 @@ export default {
       const { $router, path } = this
       await $router.push(`${path}/form/${record.Ссылка}`)
     },
-    onTableChange(pagination) {
+    onTableChange(pagination, _, sorter) {
       this.pagination = { ...pagination }
+      if (sorter.columnKey === 'Комментарий') {
+        return
+      }
+      this.sortBy = sorter.columnKey
       this.$fetch()
     },
     dblClickHandler(record) {
