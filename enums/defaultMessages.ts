@@ -1,3 +1,3 @@
-export default {
-  authError: 'Неправильный имя пользователя или пароль',
+export enum defaultMessages {
+  authError = 'Неправильный имя пользователя или пароль',
 }

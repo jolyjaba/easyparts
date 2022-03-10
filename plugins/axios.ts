@@ -1,6 +1,6 @@
 import { Plugin } from '@nuxt/types'
 import { encode } from 'base-64'
-import defaultMessages from '~/enums/defaultMessages'
+import { defaultMessages } from '~/enums/defaultMessages'
 
 function unicodeUnEscape(string: string) {
   return string.replace(/%u([\dA-Z]{4})|%([\dA-Z]{2})/g, function (_, m1, m2) {
