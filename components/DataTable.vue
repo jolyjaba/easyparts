@@ -80,10 +80,13 @@ export default {
         return this.$route.path
       },
     },
+    isGroup: { type: Boolean },
     editable: { type: Boolean },
     hasPrintOption: { type: Boolean },
+    object: { type: Object, default: () => ({}) },
     markable: { type: Boolean, default: () => true },
     selectedRows: { type: Array, default: () => [] },
+    requisites: { type: Object, default: () => ({}) },
     nameOfObject: { type: String, reqired: true, default: () => '' },
     typeOfObject: { type: String, reqired: true, default: () => '' },
   },
@@ -173,19 +176,6 @@ export default {
       return (record) => ({
         on: { dblclick: () => editable && dblClickHandler(record) },
       })
-    },
-    isGroup() {
-      return this.requisites?.ЭтоГруппа?.СтандартноеЗначение !== undefined
-    },
-    object() {
-      const { metadata, typeOfObject, nameOfObject } = this
-      return metadata[typeOfObject][nameOfObject]
-    },
-    readable() {
-      return this.object.Настройки.ВозможностьЧитать
-    },
-    requisites() {
-      return this.object.Реквизиты
     },
     rules() {
       const entries = Object.entries(this.requisites)

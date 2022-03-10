@@ -1,27 +1,39 @@
 <template>
   <APageHeader :title="title" @back="() => $router.back()">
+    <ABreadcrumb v-if="isGroup">
+      <ABreadcrumbItem v-for="route in routes" :key="route.path">
+        <a @click="onClick(route)">
+          {{ route.breadcrumbName }}
+        </a>
+      </ABreadcrumbItem>
+    </ABreadcrumb>
+    <br />
     <template slot="extra">
       <AButton v-if="hasPrintOption" @click="onPrint">
         <AIcon type="printer" />
         Печать
       </AButton>
-      <NuxtLink :to="`${$route.fullPath}/form`">
+      <NuxtLink :to="`${path}/form`">
         <AButton type="primary" :disabled="!editable"> Создать </AButton>
       </NuxtLink>
     </template>
     <LazyDataTable
       v-model="selectedRows"
-      :has-print-option="hasPrintOption"
+      :path="path"
+      :object="object"
+      :is-group="isGroup"
+      :editable="editable"
+      :requisites="requisites"
       :name-of-object="nameOfObject"
       :type-of-object="typeOfObject"
-      :editable="editable"
+      :has-print-option="hasPrintOption"
     >
       <template slot="actions" slot-scope="{ record }">
         <AMenuItem v-if="hasCopyButton" key="copy">
           <NuxtLink
             v-slot="{ navigate }"
             custom
-            :to="`${$route.path}/form/create-from-copy/${record.Ссылка}`"
+            :to="`${path}/form/create-from-copy/${record.Ссылка}`"
           >
             <span @click="navigate">
               <AIcon type="copy" />

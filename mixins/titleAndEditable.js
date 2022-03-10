@@ -19,12 +19,6 @@ export default {
       nameOfObject,
       typeOfObject,
     } = this
-    // $store.dispatch('fetchByAPI', {
-    //   action: 'ПолучитьСписокПечатныхФорм',
-    //   params: {
-    //     Назначение: this.fullKey,
-    //   },
-    // })
     const guid = $route.params.GUID
     if (guid) {
       const index = routes.findIndex((item) => item.path === guid)
@@ -60,6 +54,22 @@ export default {
     ...mapGetters({
       metadata: 'metadata',
     }),
+    path() {
+      const {
+        $route: { name },
+      } = this
+      return encodeURI(`/${name.replace('-GUID', '').split('-').join('/')}`)
+    },
+    isGroup() {
+      return this.requisites?.ЭтоГруппа?.СтандартноеЗначение !== undefined
+    },
+    object() {
+      const { metadata, typeOfObject, nameOfObject } = this
+      return metadata[typeOfObject][nameOfObject]
+    },
+    requisites() {
+      return this.object.Реквизиты
+    },
     fullKey() {
       const { $route, metadata } = this
       const [parentCategory, nameOfObject] = $route.name.split('-')
