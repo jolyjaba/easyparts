@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from 'vue'
-import { IError } from '~/types/error'
+import type { IError } from '~/types/error'
 
 export default Vue.extend({
   name: 'ErrorLayout',

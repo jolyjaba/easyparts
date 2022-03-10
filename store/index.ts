@@ -1,5 +1,5 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { IPayload } from '~/types/payloadParams'
+import type { IPayload } from '~/types/payloadParams'
 import createFormData from '~/utils/createFormData'
 
 export const state = () => ({

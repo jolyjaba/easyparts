@@ -1,4 +1,4 @@
-import { IPayload } from '~/types/payloadParams'
+import type { IPayload } from '~/types/payloadParams'
 
 export default ({
   typeOfObject,
