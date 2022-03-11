@@ -252,6 +252,7 @@ export default {
         pagination,
         typeOfObject,
         nameOfObject,
+        parentGuid,
       } = this
       const ДополнительныеПоля = Object.entries(requisites)
         .filter(([_, value]) => value.Видимость)
@@ -280,13 +281,30 @@ export default {
           })
         }
       })
-      const params = {
-        ...(filters.length && {
-          Фильтры: [...filters, ..._params],
-        }),
+      let params = {
         КоличествоЭлементовНаСтранице: pagination.pageSize,
         ТекущаяСтраница: pagination.current,
         ДополнительныеПоля,
+      }
+      if (this.isGroup) {
+        params = {
+          ...params,
+          Фильтры: [
+            {
+              Реквизит: 'Родитель',
+              Группа: false,
+              Вид: '=',
+              Значение: parentGuid,
+            },
+          ],
+        }
+      }
+      if (filters.length) {
+        if (params.Фильтры === undefined) {
+          params = {
+            Фильтры: [...filters, ..._params],
+          }
+        }
       }
       const payload = {
         action: 'Получить',

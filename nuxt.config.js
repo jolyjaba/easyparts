@@ -70,6 +70,8 @@ export default {
     '@nuxtjs/color-mode',
     // https://github.com/nuxt-community/dayjs-module
     '@nuxtjs/dayjs',
+    // https://github.com/frenchrabbit/nuxt-precompress
+    'nuxt-precompress',
   ],
 
   dayjs: {
